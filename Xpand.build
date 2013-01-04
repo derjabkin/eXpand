@@ -157,6 +157,7 @@
 			.\Xpand.Addins\Xpand.ExpressApp.ModelEditor\Xpand.ExpressApp.ModelEditor.csproj;
 			.\Xpand.Addins\XpandAddIns.csproj;
 			.\Xpand\Xpand.Tests\Xpand.Tests\Xpand.Tests.csproj;
+			.\MasterDetailExpand\MasterDetailExpand.sln;
 			" />	
 	</ItemGroup>
 	
@@ -174,8 +175,13 @@
 
 	<UsingTask TaskName="MSBuild.ExtensionPack.FileSystem.File" AssemblyFile="Resource\build\ExtensionPack\MSBuild.ExtensionPack.dll" />	
 	<UsingTask TaskName="Mash2.MSBuild.Tasks.Twitter" AssemblyFile="Resource\build\Mash2\Mash2.MSBuild.Tasks.dll" />
+	<UsingTask TaskName="Xpand.MSBuild.Tasks.ConvertToSimpleNames" AssemblyFile="Xpand.MSBuild.Tasks\bin\Debug\Xpand.MSBuild.Tasks.dll"/>
+	
 	
 	<Target Name="ReplaceKey">
+		<ConvertToSimpleNames Projects="@(ProjectFiles)"/>
+	</Target>
+	<Target Name="ReplaceKeyOld">
 		<CreateItem Include="**\*.csproj;**\*.config;**\*.skin" Exclude=".git;Build;">
 			<Output ItemName="_filesToChange" TaskParameter="Include"/>
 		</CreateItem>    
@@ -201,7 +207,7 @@
 	<Target Name="Clean">
 		<MSBuild Projects="@(ProjectFiles)" Targets="Clean" Properties="Configuration=$(Configuration)"/>
 
-		<CreateItem Include="**/Debug/**/*.*;**/Release/**/*.*">
+		<CreateItem Include="**/Debug/**/*.*;**/Release/**/*.*" Exclude="Xpand.MSBuild.Tasks\bin\**">
 			<Output ItemName="_binaryFiles" TaskParameter="Include"/>
 		</CreateItem>
 		<Delete Files="@(_binaryFiles)" TreatErrorsAsWarnings="true"/>
