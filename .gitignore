@@ -1,0 +1,9 @@
+
+bin
+obj
+*.suo
+*.user
+Xpand.dll
+/Demos/FeatureCenter/FeatureCenter.Web/*.log
+Build/Temp
+*.cache
