@@ -153,6 +153,7 @@
 			.\Xpand.Addins\Xpand.ExpressApp.ModelEditor\Xpand.ExpressApp.ModelEditor.csproj;
 			.\Xpand.Addins\XpandAddIns.csproj;
 			.\Xpand\Xpand.Tests\Xpand.Tests\Xpand.Tests.csproj;
+			.\MasterDetailExpand\MasterDetailExpand.sln;
 			" />	
 	</ItemGroup>
 	

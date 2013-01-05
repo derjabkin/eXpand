@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{9EF9A519-4594-4A5A-87BD-A7B239F8ED86}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MasterDetailExpand.Module.Win</RootNamespace>
+    <AssemblyName>MasterDetailExpand.Module.Win</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'EasyTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\EasyTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EASYTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.FileAttachment.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.HtmlPropertyEditor.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.PivotChart.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.PivotChart.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.PivotGrid.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Chart.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Scheduler.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Reports.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Reports.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Scheduler.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.TreeListEditors.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.TreeListEditors.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.ViewVariantsModule.v12.2" />
+    <Reference Include="DevExpress.Utils.v12.2" />
+    <Reference Include="DevExpress.Printing.v12.2.Core" />
+    <Reference Include="DevExpress.Data.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Xpo.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Objects.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Security.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Validation.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Validation.Win.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Win.v12.2" />
+    <Reference Include="DevExpress.Persistent.Base.v12.2" />
+    <Reference Include="DevExpress.Persistent.BaseImpl.v12.2" />
+    <Reference Include="DevExpress.Xpo.v12.2" />
+    <Reference Include="DevExpress.Charts.v12.2.Core" />
+    <Reference Include="DevExpress.XtraCharts.v12.2.Wizard" />
+    <Reference Include="DevExpress.XtraCharts.v12.2" />
+    <Reference Include="DevExpress.XtraCharts.v12.2.UI" />
+    <Reference Include="DevExpress.XtraGrid.v12.2" />
+    <Reference Include="DevExpress.XtraEditors.v12.2" />
+    <Reference Include="DevExpress.XtraLayout.v12.2" />
+    <Reference Include="DevExpress.XtraNavBar.v12.2" />
+    <Reference Include="DevExpress.XtraBars.v12.2" />
+    <Reference Include="DevExpress.XtraPivotGrid.v12.2" />
+    <Reference Include="DevExpress.PivotGrid.v12.2.Core" />
+    <Reference Include="DevExpress.XtraPrinting.v12.2" />
+    <Reference Include="DevExpress.XtraReports.v12.2.Extensions" />
+    <Reference Include="DevExpress.Utils.v12.2.UI" />
+    <Reference Include="DevExpress.XtraReports.v12.2" />
+    <Reference Include="DevExpress.XtraScheduler.v12.2.Reporting.Extensions" />
+    <Reference Include="DevExpress.XtraScheduler.v12.2" />
+    <Reference Include="DevExpress.XtraScheduler.v12.2.Core" />
+    <Reference Include="DevExpress.XtraTreeList.v12.2" />
+    <Reference Include="DevExpress.XtraWizard.v12.2" />
+    <Reference Include="Xpand.ExpressApp" />
+    <Reference Include="Xpand.ExpressApp.Validation.Win" />
+    <Reference Include="Xpand.ExpressApp.TreeListEditors" />
+    <Reference Include="Xpand.ExpressApp.AdditionalViewControlsProvider" />
+    <Reference Include="Xpand.ExpressApp.AdditionalViewControlsProvider.Win" />
+    <Reference Include="Xpand.ExpressApp.ArtifactState" />
+    <Reference Include="Xpand.ExpressApp.ImportWizard.Win" />
+    <Reference Include="Xpand.ExpressApp.ConditionalActionState" />
+    <Reference Include="Xpand.ExpressApp.ConditionalControllerState" />
+    <Reference Include="Xpand.ExpressApp.ExceptionHandling" />
+    <Reference Include="Xpand.ExpressApp.ExceptionHandling.Win" />
+    <Reference Include="Xpand.ExpressApp.FilterDataStore" />
+    <Reference Include="Xpand.ExpressApp.FilterDataStore.Win" />
+    <Reference Include="Xpand.ExpressApp.IO" />
+    <Reference Include="Xpand.ExpressApp.IO.Win" />
+    <Reference Include="Xpand.ExpressApp.Logic" />
+    <Reference Include="Xpand.ExpressApp.Logic.Conditional" />
+    <Reference Include="Xpand.ExpressApp.Logic.Win" />
+    <Reference Include="Xpand.ExpressApp.MasterDetail" />
+    <Reference Include="Xpand.ExpressApp.MasterDetail.Win" />
+    <Reference Include="Xpand.ExpressApp.ModelArtifactState" />
+    <Reference Include="Xpand.ExpressApp.ModelDifference" />
+    <Reference Include="Xpand.ExpressApp.ModelDifference.Win" />
+    <Reference Include="Xpand.ExpressApp.PivotChart" />
+    <Reference Include="Xpand.ExpressApp.PivotChart.Win" />
+    <Reference Include="Xpand.ExpressApp.Chart.Win" />
+    <Reference Include="Xpand.ExpressApp.PivotGrid.Win" />
+    <Reference Include="Xpand.ExpressApp.Reports.Win" />
+    <Reference Include="Xpand.ExpressApp.Scheduler.Win" />
+    <Reference Include="Xpand.ExpressApp.Security" />
+    <Reference Include="Xpand.ExpressApp.Security.Win" />
+    <Reference Include="Xpand.ExpressApp.TreeListEditors.Win" />
+    <Reference Include="Xpand.ExpressApp.Validation" />
+    <Reference Include="Xpand.ExpressApp.ViewVariants" />
+    <Reference Include="Xpand.ExpressApp.Win" />
+    <Reference Include="Xpand.ExpressApp.WizardUI.Win" />
+    <Reference Include="Xpand.ExpressApp.WorldCreator" />
+    <Reference Include="Xpand.ExpressApp.WorldCreator.Win" />
+    <Reference Include="Xpand.Persistent.Base" />
+    <Reference Include="Xpand.Persistent.BaseImpl" />
+    <Reference Include="Xpand.Utils" />
+    <Reference Include="Xpand.Xpo" />
+    <Reference Include="System">
+      <Name>System</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.configuration">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WinModule.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="WinModule.Designer.cs">
+      <DependentUpon>WinModule.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinModule.resx">
+      <DependentUpon>WinModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MasterDetailExpand.Module\MasterDetailExpand.Module.csproj">
+      <Project>{913BE08E-1567-464D-8704-1D63B32BA01E}</Project>
+      <Name>MasterDetailExpand.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

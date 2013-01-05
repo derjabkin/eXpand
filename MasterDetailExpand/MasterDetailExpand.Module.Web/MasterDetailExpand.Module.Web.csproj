@@ -1,0 +1,188 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DAB8CC7C-EDA1-4DFB-965A-81584BA4E3F3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MasterDetailExpand.Module.Web</RootNamespace>
+    <AssemblyName>MasterDetailExpand.Module.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'EasyTest|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\EasyTest\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;EASYTEST</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Printing.v12.2.Core" />
+    <Reference Include="DevExpress.Data.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.FileAttachment.Web.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.PivotChart.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.PivotChart.Web.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Reports.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Reports.Web.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.TreeListEditors.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.TreeListEditors.Web.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Xpo.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Images.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Objects.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Security.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Validation.v12.2" />
+    <Reference Include="DevExpress.ExpressApp.Web.v12.2" />
+    <Reference Include="DevExpress.Persistent.Base.v12.2" />
+    <Reference Include="DevExpress.Persistent.BaseImpl.v12.2" />
+    <Reference Include="DevExpress.Utils.v12.2" />
+    <Reference Include="DevExpress.Web.ASPxPivotGrid.v12.2" />
+    <Reference Include="DevExpress.Web.ASPxSpellChecker.v12.2" />
+    <Reference Include="DevExpress.Web.ASPxTreeList.v12.2" />
+    <Reference Include="DevExpress.Web.v12.2" />
+    <Reference Include="DevExpress.Xpo.v12.2" />
+    <Reference Include="DevExpress.Charts.v12.2.Core" />
+    <Reference Include="DevExpress.XtraCharts.v12.2.Wizard" />
+    <Reference Include="DevExpress.XtraCharts.v12.2" />
+    <Reference Include="DevExpress.XtraCharts.v12.2.Web" />
+    <Reference Include="DevExpress.PivotGrid.v12.2.Core" />
+    <Reference Include="DevExpress.XtraPivotGrid.v12.2" />
+    <Reference Include="DevExpress.XtraReports.v12.2.Extensions" />
+    <Reference Include="DevExpress.XtraPrinting.v12.2" />
+    <Reference Include="DevExpress.Utils.v12.2.UI" />
+    <Reference Include="DevExpress.XtraReports.v12.2" />
+    <Reference Include="DevExpress.XtraReports.v12.2.Web" />
+    <Reference Include="Xpand.ExpressApp" />
+    <Reference Include="Xpand.ExpressApp.Validation.Web" />
+    <Reference Include="Xpand.ExpressApp.AdditionalViewControlsProvider" />
+    <Reference Include="Xpand.ExpressApp.AdditionalViewControlsProvider.Web" />
+    <Reference Include="Xpand.ExpressApp.ExceptionHandling" />
+    <Reference Include="Xpand.ExpressApp.ExceptionHandling.Web" />
+    <Reference Include="Xpand.ExpressApp.FilterDataStore" />
+    <Reference Include="Xpand.ExpressApp.FilterDataStore.Web" />
+    <Reference Include="Xpand.ExpressApp.IO" />
+    <Reference Include="Xpand.ExpressApp.IO.Web" />
+    <Reference Include="Xpand.ExpressApp.Logic" />
+    <Reference Include="Xpand.ExpressApp.Logic.Conditional" />
+    <Reference Include="Xpand.ExpressApp.ModelDifference" />
+    <Reference Include="Xpand.ExpressApp.ModelDifference.Web" />
+    <Reference Include="Xpand.ExpressApp.NCarousel.Web" />
+    <Reference Include="Xpand.ExpressApp.PivotChart" />
+    <Reference Include="Xpand.ExpressApp.PivotChart.Web" />
+    <Reference Include="Xpand.ExpressApp.Thumbnail.Web" />
+    <Reference Include="Xpand.ExpressApp.TreeListEditors" />
+    <Reference Include="Xpand.ExpressApp.TreeListEditors.Web" />
+    <Reference Include="Xpand.ExpressApp.Web" />
+    <Reference Include="Xpand.ExpressApp.WorldCreator" />
+    <Reference Include="Xpand.ExpressApp.WorldCreator.Web" />
+    <Reference Include="Xpand.NCarousel" />
+    <Reference Include="Xpand.Persistent.Base" />
+    <Reference Include="System">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml">
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="WebModule.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Updater.cs" />
+    <Compile Include="WebModule.Designer.cs">
+      <DependentUpon>WebModule.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Model.DesignedDiffs.xafml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WebModule.resx">
+      <DependentUpon>WebModule.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MasterDetailExpand.Module\MasterDetailExpand.Module.csproj">
+      <Project>{913BE08E-1567-464D-8704-1D63B32BA01E}</Project>
+      <Name>MasterDetailExpand.Module</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
