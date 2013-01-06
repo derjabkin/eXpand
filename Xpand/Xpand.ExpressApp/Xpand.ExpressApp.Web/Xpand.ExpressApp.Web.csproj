@@ -57,6 +57,7 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevExpress.ExpressApp.ConditionalAppearance.v12.2" />
     <Reference Include="DevExpress.ExpressApp.Validation.v12.2" />
     <Reference Include="DevExpress.Persistent.Base.v12.2" />
     <Reference Include="DevExpress.Printing.v12.2.Core" />
@@ -89,6 +90,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\DisableProcessCurrentObjectController.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controllers\UpdateVisibilityController.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Core\ListViewExtensions.cs">
