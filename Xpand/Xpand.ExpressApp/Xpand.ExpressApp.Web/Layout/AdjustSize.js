@@ -1,7 +1,7 @@
 ﻿function (s, e) {
     window.DetailUpdatePanelControl = s; s.GetMainElement().ClientControl = s;
     if (!window.AdjustSizeOverriden) {
-        window.AdjustSize = function () {
+        window.AdjustSizeCore = function () {
             var middleRowContent = document.getElementById("CP");
             middleRowContent.style.overflow = "hidden";
             var middleRowParent = document.getElementById("MRC");
@@ -65,7 +65,7 @@
                 }
             }
 
-
+			window.isAdjusting = false;
 
         }
         var dxo = aspxGetGlobalEvents();
