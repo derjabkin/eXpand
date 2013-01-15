@@ -42,8 +42,9 @@
             var controlToResize = window.MasterDetailSplitter;
             var footerTableHeight = footer != null ? footer.getElementsByTagName("table")[0].offsetHeight : 0;
 
-            var middleRowHeight = windowHeight - mainTableHeight + footerTableHeight + middleRowParent.offsetHeight - getHeight("UPVH") -
-        getHeight("TB_Menu") - getParentTagHeight("UPQC", "td");
+            var middleRowHeight = windowHeight - mainTableHeight + footerTableHeight + middleRowParent.offsetHeight - getHeight("Horizontal_UPVH") -
+				getHeight("Horizontal_TB_Menu") - getParentTagHeight("UPQC", "td") - getHeight("Vertical_UPVH") -
+				getHeight("Vertial_TB_Menu") - getHeight("VH");
 
             if (controlToResize) {
                 var elementToResize = controlToResize.GetMainElement();
@@ -71,6 +72,7 @@
         var dxo = aspxGetGlobalEvents();
         dxo.EndCallback.AddHandler(window.AdjustSize);
         window.AdjustSizeOverriden = true;
+		window.AdjustSizeCore();
     }
-
+	
 }
