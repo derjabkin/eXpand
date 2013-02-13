@@ -110,6 +110,8 @@
     <Compile Include="ObjectChangedWorkflows\ObjectChangedWorkflowStartService.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ScheduledWorkflows\ScheduledWorkflowLaunchSchedule.cs" />
+    <Compile Include="ScheduledWorkflows\ScheduledWorkflowProviderService.cs" />
     <Compile Include="WorkflowStartService.cs" />
     <Compile Include="ObjectChangedWorkflows\StartWorkflowOnObjectChangeService.cs" />
     <Compile Include="XpandWorkflowDefinitionProvider.cs" />
