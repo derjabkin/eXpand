@@ -7,3 +7,5 @@ Xpand.dll
 /Demos/FeatureCenter/FeatureCenter.Web/*.log
 Build/Temp
 *.cache
+/Build
+/Resource/Machine.Specifications
