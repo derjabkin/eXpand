@@ -22,7 +22,7 @@ namespace MasterDetailExpand.Module
 		public override void UpdateDatabaseAfterUpdateSchema()
 		{
 			base.UpdateDatabaseAfterUpdateSchema();
-			SecuritySystemRole defaultRole = ObjectSpace.GetDefaultRole();
+			SecuritySystemRoleBase defaultRole = ObjectSpace.GetDefaultRole();
 
 			var adminRole = ObjectSpace.GetAdminRole("Admin");
 			adminRole.GetUser("Admin");
@@ -39,3 +39,4 @@ namespace MasterDetailExpand.Module
 		}
 	}
 }
+
