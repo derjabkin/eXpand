@@ -19,24 +19,6 @@ namespace MasterDetailExpand.Module
 			: base(objectSpace, currentDBVersion)
 		{
 		}
-		public override void UpdateDatabaseAfterUpdateSchema()
-		{
-			base.UpdateDatabaseAfterUpdateSchema();
-			SecuritySystemRoleBase defaultRole = ObjectSpace.GetDefaultRole();
-
-			var adminRole = ObjectSpace.GetAdminRole("Admin");
-			adminRole.GetUser("Admin");
-
-			var userRole = ObjectSpace.GetRole("User");
-			var user = userRole.GetUser("user");
-			user.Roles.Add(defaultRole);
-
-			var modelRole = ObjectSpace.GetDefaultModelRole("ModelRole");
-			user.Roles.Add(modelRole);
-
-			ObjectSpace.CommitChanges();
-
-		}
 	}
 }
 
