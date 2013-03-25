@@ -57,6 +57,14 @@
 			set { this.SetPropertyValue("Name", ref this.name, value); }
 		}
 
+        [Association, Aggregated]
+        public XPCollection<DemoBoolDetail> Details
+        {
+            get
+            {
+                return GetCollection<DemoBoolDetail>("Details");
+            }
+        }
 		#endregion
 	}
 }

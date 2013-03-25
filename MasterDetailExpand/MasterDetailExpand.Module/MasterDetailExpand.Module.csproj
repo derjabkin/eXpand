@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BusinessObjects\DemoBool.cs" />
+    <Compile Include="BusinessObjects\DemoBoolDetail.cs" />
     <Compile Include="Module.cs">
       <SubType>Component</SubType>
     </Compile>

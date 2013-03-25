@@ -6,6 +6,7 @@ obj
 Xpand.dll
 /Demos/FeatureCenter/FeatureCenter.Web/*.log
 Build/Temp
+Build/NuGet
 *.cache
 /Oranier.RepairOrder.Web/ModelAdaptor/12.2.5.0/ModelAdaptorASPxGridView.dll
 
