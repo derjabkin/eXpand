@@ -41,6 +41,12 @@
                 }
 
             }
+			
+			var restoreOriginalOverflow = function() {
+				if (middleRowContent.originalOverflow)
+					middleRowContent.style.overflow = middleRowContent.originalOverflow;
+			};
+			
             var mainTableHeight;
 
             mainTableHeight = mainTable.offsetHeight;
@@ -56,6 +62,8 @@
 				getHeight("Vertial_TB_Menu");
 
             if (controlToResize) {
+				if (!middleRowContent.originalOverflow)
+					middleRowContent.originalOverflow = middleRowContent.style.overflow;
                 middleRowContent.style.overflow = "hidden";
                 var elementToResize = controlToResize.GetMainElement();
                 if (elementToResize) {
@@ -71,12 +79,12 @@
                     middleRowContent.style.height = middleRowHeight + "px";
                 }
                 else {
-                    middleRowContent.style.overflow = "auto";
+					restoreOriginalOverflow();
                 }
 				
             }
             else {
-                middleRowContent.style.overflow = "auto";
+                restoreOriginalOverflow();
                 if (windowHeight > mainTable.offsetHeight) {
                     middleRowContent.style.height = middleRowHeight + "px";
                 }
