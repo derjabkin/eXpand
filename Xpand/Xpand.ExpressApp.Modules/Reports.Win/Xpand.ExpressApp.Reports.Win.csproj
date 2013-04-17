@@ -109,10 +109,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dashboard\DashboardInteractionReportsController.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Dashboard\DashboardReportViewItem.cs" />
     <Compile Include="XpandReportsWindowsFormsModule.cs">
       <SubType>Component</SubType>
     </Compile>

@@ -59,7 +59,6 @@ namespace MasterDetailExpand.Module
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.WorldCreator.WorldCreatorModule));
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.IO.IOModule));
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.Validation.XpandValidationModule));
-			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.PivotChart.XpandPivotChartModule));
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.TreeListEditors.XpandTreeListEditorsModule));
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.FilterDataStore.FilterDataStoreModule));
 			this.RequiredModuleTypes.Add(typeof(Xpand.ExpressApp.AdditionalViewControlsProvider.AdditionalViewControlsModule));

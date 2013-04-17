@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Title="MasterDetailExpand" Logo="ExpressAppLogo">
   <SchemaModules>
-    <SchemaModule Name="LogicModule" Version="12.2.4.0" IsNewNode="True" />
-    <SchemaModule Name="SystemModule" Version="12.2.4.0" IsNewNode="True" />
-    <SchemaModule Name="XpandSystemModule" Version="12.2.4.0" IsNewNode="True" />
+    <SchemaModule Name="LogicModule" Version="12.2.7.2" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="12.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="XpandSystemModule" Version="12.2.7.2" IsNewNode="True" />
   </SchemaModules>
+  <Views>
+    <ListView Id="DemoBool_ListView">
+      <SplitLayout Direction="Horizontal" />
+    </ListView>
+    <ListView Id="DemoBoolDetail_ListView">
+      <SplitLayout Direction="Horizontal" />
+    </ListView>
+  </Views>
 </Application>

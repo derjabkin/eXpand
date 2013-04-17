@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using DevExpress.Xpo;
 using DevExpress.ExpressApp.Model;
+using DevExpress.Persistent.Base;
 
 namespace MasterDetailExpand.Module.BusinessObjects
 {
-    [ModelDefault("DefaultListViewMasterDetailMode", "ListViewAndDetailView")]
+    [DefaultClassOptions]
+    //[ModelDefault("DefaultListViewMasterDetailMode", "ListViewAndDetailView")]
     public class DemoBoolDetail : BaseObject
     {
         public DemoBoolDetail(DevExpress.Xpo.Session session)

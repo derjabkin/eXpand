@@ -99,7 +99,6 @@
     <Reference Include="Xpand.ExpressApp.Logic.Conditional" />
     <Reference Include="Xpand.ExpressApp.ModelArtifactState" />
     <Reference Include="Xpand.ExpressApp.ModelDifference" />
-    <Reference Include="Xpand.ExpressApp.PivotChart" />
     <Reference Include="Xpand.ExpressApp.Security" />
     <Reference Include="Xpand.ExpressApp.Validation" />
     <Reference Include="Xpand.ExpressApp.ViewVariants" />
