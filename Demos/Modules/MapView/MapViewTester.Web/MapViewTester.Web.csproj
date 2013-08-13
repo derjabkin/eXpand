@@ -53,7 +53,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Artem.Google, Version=6.1.0.0, Culture=neutral, PublicKeyToken=fc8d6190a3aeb01c, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.ExpressApp.Security.v13.1" />
     <Reference Include="DevExpress.ExpressApp.Validation.v13.1" />
     <Reference Include="DevExpress.ExpressApp.Xpo.v13.1">
@@ -177,6 +176,7 @@
     <Content Include="Images\UnSelectedLeft.gif" />
     <Content Include="Images\UnSelectedRight.gif" />
     <Content Include="Login.aspx" />
+    <Content Include="MapControlTest.aspx" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -193,6 +193,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MapControlTest.aspx.cs">
+      <DependentUpon>MapControlTest.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MapControlTest.aspx.designer.cs">
+      <DependentUpon>MapControlTest.aspx</DependentUpon>
     </Compile>
     <Compile Include="WebApplication.cs">
       <SubType>Component</SubType>
