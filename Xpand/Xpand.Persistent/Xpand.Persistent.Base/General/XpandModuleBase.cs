@@ -520,7 +520,7 @@ namespace Xpand.Persistent.Base.General {
 
         public static void DisposeManagers() {
             _storeManagers = new List<object>();
-            if (_instanceModelApplicationCreatorManager != null) {
+            if (_instanceModelApplicationCreatorManager != null && _instanceModelApplicationCreatorManager.CanManageValue) {
                 _storeManagers.Add(_instanceModelApplicationCreatorManager.Value);
                 _instanceModelApplicationCreatorManager.Value = null;
             }
