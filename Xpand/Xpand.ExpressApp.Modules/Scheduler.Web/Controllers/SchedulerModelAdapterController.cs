@@ -93,7 +93,7 @@ namespace Xpand.ExpressApp.Scheduler.Web.Controllers {
 
         protected override void OnDeactivated() {
             base.OnDeactivated();
-            if (SchedulerListEditor != null) {
+            if (SchedulerListEditor != null && SchedulerListEditor.SchedulerControl!=null) {
                 SchedulerListEditor.SchedulerControl.PopupMenuShowing -= SchedulerControlOnPopupMenuShowing;
             }
         }
