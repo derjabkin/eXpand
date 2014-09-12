@@ -33,47 +33,58 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Charts.v14.1.Core">
+    <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Charts.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.CodeParser.v14.1">
+    <Reference Include="DevExpress.CodeParser.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.CodeParser.v14.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v14.1">
+    <Reference Include="DevExpress.Data.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Data.v14.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Images.v14.1">
+    <Reference Include="DevExpress.Images.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Images.v14.1.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Office.v14.1.Core">
+    <Reference Include="DevExpress.Office.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Office.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.PivotGrid.v14.1.Core">
+    <Reference Include="DevExpress.PivotGrid.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.PivotGrid.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Printing.v14.1.Core">
+    <Reference Include="DevExpress.Printing.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Printing.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v14.1.Core">
+    <Reference Include="DevExpress.RichEdit.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.RichEdit.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Sparkline.v14.1.Core">
+    <Reference Include="DevExpress.Sparkline.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Sparkline.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Spreadsheet.v14.1.Core">
+    <Reference Include="DevExpress.Spreadsheet.v14.1.Core, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Spreadsheet.v14.1.Core.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Utils.v14.1">
+    <Reference Include="DevExpress.Utils.v14.1, Version=14.1.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\DevExpress.Core.14.1.6.0\lib\net40\DevExpress.Utils.v14.1.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -90,15 +101,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\Xpand.ExpressApp.NH.Core\Xpand.ExpressApp.NH.Core.csproj">
       <Project>{e87b0afc-3b3e-4969-bbaf-afdda718bbc7}</Project>
       <Name>Xpand.ExpressApp.NH.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -108,5 +117,4 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <Import Project="..\..\..\Support\Build\Nuget.Targets" />
 </Project>
