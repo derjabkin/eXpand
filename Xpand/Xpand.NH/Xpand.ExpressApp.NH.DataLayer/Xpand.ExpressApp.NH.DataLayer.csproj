@@ -34,46 +34,46 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DevExpress.Charts.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Charts.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Charts.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.CodeParser.v14.1">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.CodeParser.v14.1.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.CodeParser.v14.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Data.v14.1">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Data.v14.1.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Data.v14.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Images.v14.1">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Images.v14.1.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Images.v14.1.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Office.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Office.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Office.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.PivotGrid.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.PivotGrid.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.PivotGrid.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Printing.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Printing.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Printing.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.RichEdit.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.RichEdit.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.RichEdit.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Sparkline.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Sparkline.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Sparkline.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Spreadsheet.v14.1.Core">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Spreadsheet.v14.1.Core.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Spreadsheet.v14.1.Core.dll</HintPath>
     </Reference>
     <Reference Include="DevExpress.Utils.v14.1">
-      <HintPath>..\packages\DevExpress.Core.14.1.7.0\lib\net40\DevExpress.Utils.v14.1.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.1.8.1\lib\net40\DevExpress.Utils.v14.1.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate">
-      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Iesi.Collections">
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
