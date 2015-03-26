@@ -87,7 +87,7 @@ namespace Xpand.ExpressApp.NH.Service
 
         private static bool IsMappingType(Type type)
         {
-            if (type.BaseType == null || !type.BaseType.IsGenericType || type == typeof(ClassMap<>))
+            if (type.BaseType == null || !type.BaseType.IsGenericType || type == typeof(ClassMap<>) || type.IsAbstract )
                 return false;
 
             Type classMapGeneric = typeof(ClassMap<>).MakeGenericType(type.BaseType.GetGenericArguments()[0]);
