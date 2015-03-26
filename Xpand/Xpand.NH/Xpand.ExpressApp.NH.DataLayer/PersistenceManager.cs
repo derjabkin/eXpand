@@ -226,12 +226,24 @@ namespace Xpand.ExpressApp.NH.DataLayer
             return propertyMetadata;
         }
 
-        private StringBuilder CreateFromAndWhereHql(Type objectType, string criteriaString)
+        private StringBuilder CreateFromAndWhereHql(Type objectType, IList<CriteriaOperator> members, string criteriaString)
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
 
             StringBuilder sb = new StringBuilder();
+
+            if (members != null && members.Count > 0)
+            {
+                sb.Append("select ");
+                NHWhereGenerator whereGenerator = new NHWhereGenerator();
+                foreach(var member in members)
+                {
+                    sb.AppendFormat(CultureInfo.InvariantCulture, "m.{0},", whereGenerator.Process(member));
+                }
+                sb.Length--;
+                sb.Append(" ");
+            }
             sb.AppendFormat(CultureInfo.InvariantCulture, "FROM {0} as m \r\n", objectType.Name);
 
             var metadata = this.GetMetadata().FirstOrDefault(md => md.Type == objectType);
@@ -259,16 +271,15 @@ namespace Xpand.ExpressApp.NH.DataLayer
         }
 
 
-        public IList GetObjects(string typeName, string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount)
+        public IList GetObjects(string typeName, IList<CriteriaOperator> members, string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount)
         {
-
             Guard.ArgumentIsNotNullOrEmpty(typeName, "typeName");
 
             Type objectType = Type.GetType(typeName);
             if (objectType == null)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type not found: {0}", typeName), "typeName");
 
-            StringBuilder sb = CreateFromAndWhereHql(objectType, criteria);
+            StringBuilder sb = CreateFromAndWhereHql(objectType, members, criteria);
 
             if (sorting != null && sorting.Count > 0)
                 sb.AppendFormat(CultureInfo.InvariantCulture, "order by {0}\r\n", string.Join(",", sorting));
@@ -295,7 +306,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
             Type objectType = Type.GetType(typeName);
 
-            StringBuilder sb = CreateFromAndWhereHql(objectType, criteria);
+            StringBuilder sb = CreateFromAndWhereHql(objectType, null, criteria);
             sb.Insert(0, string.Format(CultureInfo.InvariantCulture, "Select Count({0})", GetKeyPropertyName(objectType)));
             var result = GetObjects(sb.ToString());
             if (result.Count == 1)

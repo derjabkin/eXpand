@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Data.Filtering;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using Xpand.ExpressApp.NH.Core;
@@ -59,9 +60,9 @@ namespace Xpand.ExpressApp.NH.Service
             return PersistenceManager.GetMetadata();
         }
 
-        public virtual System.Collections.IList GetObjects(string typeName, string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount)
+        public virtual System.Collections.IList GetObjects(string typeName, IList<CriteriaOperator> members, string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount)
         {
-            return PersistenceManager.GetObjects(typeName, criteria, sorting, topReturnedObjectsCount);
+            return PersistenceManager.GetObjects(typeName, members, criteria, sorting, topReturnedObjectsCount);
         }
 
         public int GetObjectsCount(string typeName, string criteria)

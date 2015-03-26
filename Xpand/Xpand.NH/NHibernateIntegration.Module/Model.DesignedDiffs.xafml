@@ -1,3 +1,9 @@
-﻿<?xml version="1.0" ?>
-<Application Title="NHibernateIntegration" Logo="ExpressAppLogo" />
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="NHibernateIntegration" Logo="ExpressAppLogo">
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="14.2.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="Person_ListView" DataAccessMode="DataView" />
+  </Views>
+</Application>

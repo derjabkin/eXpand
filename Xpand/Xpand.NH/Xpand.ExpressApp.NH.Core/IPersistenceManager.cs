@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DevExpress.Data.Filtering;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Xpand.ExpressApp.NH.Core
     public interface IPersistenceManager
     {
         [OperationContract]
-        IList GetObjects(string typeName,  string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount);
+        IList GetObjects(string typeName, IList<CriteriaOperator> members,  string criteria, IList<ISortPropertyInfo> sorting, int topReturnedObjectsCount);
 
         [OperationContract]
         IList UpdateObjects(IList updateList, IList deleteList);

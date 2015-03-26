@@ -106,8 +106,7 @@ namespace Xpand.ExpressApp.NH
                 {
                     topReturnedObjectsCount = Int32.MaxValue;
                 }
-                IList<String> memberNames = propertyDescriptorCollection.DisplayableMembers.Split(new String[] { ";" }, StringSplitOptions.RemoveEmptyEntries);
-                IEnumerable queryable = objectSpace.GetObjects(objectType, memberNames, criteria, sorting, topReturnedObjectsCount);
+                IEnumerable queryable = objectSpace.GetObjects(objectType, null, criteria, sorting, topReturnedObjectsCount);
                 try
                 {
                     foreach (Object obj in queryable)

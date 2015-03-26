@@ -348,6 +348,18 @@ namespace Xpand.ExpressApp.NH
             return result;
         }
 
+        private IList<string> GetSimplePropertiesNames(Type objectType)
+        {
+            return objectType.GetProperties().Where(p => p.PropertyType.IsValueType || p.PropertyType == typeof(string)).Select(p => p.Name).ToArray();
+        }
+        protected override IList CreateDataViewCore(Type objectType, IList<DataViewExpression> expressions, CriteriaOperator criteria, IList<SortProperty> sorting)
+        {
+
+            if (expressions == null || expressions.Count == 0)
+                expressions = GetSimplePropertiesNames(objectType).Select(pn => new DataViewExpression(pn, new OperandProperty(pn))).ToArray();
+
+            return new NHDataView(this, objectType, expressions, criteria, sorting);
+        }
 
         public object GetObjectByDataViewRecord(Type objectType, object dataViewRecord)
         {
@@ -379,7 +391,8 @@ namespace Xpand.ExpressApp.NH
 
             return new List<CriteriaOperator>();
         }
-        internal IEnumerable GetObjects(Type objectType, IList<string> memberNames, CriteriaOperator criteria, List<SortProperty> sorting, int topReturnedObjectsCount)
+
+        internal IEnumerable GetObjects(Type objectType, IList<CriteriaOperator> memberNames, CriteriaOperator criteria, List<SortProperty> sorting, int topReturnedObjectsCount)
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
@@ -398,9 +411,16 @@ namespace Xpand.ExpressApp.NH
 
             string criteriaString = secureCriteria.Count > 0 ? CriteriaOperator.And(secureCriteria).ToString() : null;
 
-            var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, criteriaString,
+            var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, memberNames, criteriaString,
                 sortInfos, topReturnedObjectsCount);
 
+            if (memberNames == null || memberNames.Count == 0)
+                AddToCache(objectType, objects);
+            return objects;
+        }
+
+        private void AddToCache(Type objectType, IList objects)
+        {
             var keyInstanceCache = instances.Values.Where(ii => objectType.IsInstanceOfType(ii.Instance)).ToDictionary(ii => GetKeyValue(ii.Instance));
             for (int i = 0; i < objects.Count; i++)
             {
@@ -412,7 +432,6 @@ namespace Xpand.ExpressApp.NH
                 else
                     AddObject(obj, InstanceState.Unchanged);
             }
-            return objects;
         }
 
         private object FindInstanceByKey(Type objectType, object key)
@@ -450,7 +469,7 @@ namespace Xpand.ExpressApp.NH
             Guard.ArgumentNotNull(instance, "instance");
             if (instances.ContainsKey(instance)) return;
 
-          
+
             instances.Add(instance, new ObjectSpaceInstanceInfo { Instance = instance, State = state });
             var typeInfo = TypesInfo.FindTypeInfo(instance.GetType());
             foreach (var list in
@@ -647,7 +666,7 @@ namespace Xpand.ExpressApp.NH
             result = persistenceManager.GetObjectByKey(type, key);
             if (result != null)
                 AddObject(result, InstanceState.Unchanged);
-            
+
             return result;
         }
     }

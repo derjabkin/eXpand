@@ -187,6 +187,8 @@
     <Compile Include="Extensions.cs" />
     <Compile Include="InstanceState.cs" />
     <Compile Include="NHCollectionT.cs" />
+    <Compile Include="NHDataView.cs" />
+    <Compile Include="NHDataViewRecord.cs" />
     <Compile Include="NHEntityStore.cs" />
     <Compile Include="NHCollection.cs" />
     <Compile Include="NHNestedObjectSpace.cs" />
