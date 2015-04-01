@@ -25,8 +25,8 @@ namespace TestEntities
         [DataMember]
         public DateTime BirthDate { get; set; }
 
-        
-        
+        public string NonpersistentProperty { get; set; }
+
         [DataMember]
         public IList<PhoneNumber> PhoneNumbers
         {

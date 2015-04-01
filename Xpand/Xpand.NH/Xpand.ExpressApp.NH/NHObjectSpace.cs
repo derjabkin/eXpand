@@ -350,7 +350,10 @@ namespace Xpand.ExpressApp.NH
 
         private IList<string> GetSimplePropertiesNames(Type objectType)
         {
-            return objectType.GetProperties().Where(p => p.PropertyType.IsValueType || p.PropertyType == typeof(string)).Select(p => p.Name).ToArray();
+            var typeInfo = TypesInfo.FindTypeInfo(objectType);
+            Guard.ArgumentNotNull(typeInfo, "typeInfo");
+
+            return typeInfo.Members.Where(m => m.IsPersistent && (m.MemberType.IsValueType || m.MemberType == typeof(string))).Select(m => m.Name).ToArray();
         }
         protected override IList CreateDataViewCore(Type objectType, IList<DataViewExpression> expressions, CriteriaOperator criteria, IList<SortProperty> sorting)
         {
