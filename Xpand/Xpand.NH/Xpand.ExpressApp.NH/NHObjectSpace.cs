@@ -494,7 +494,36 @@ namespace Xpand.ExpressApp.NH
             return instance;
         }
 
-        public override object GetObject(object objectFromDifferentObjectSpace)
+
+        public override object GetObject(object obj)
+        {
+            XafDataViewRecord viewRecord = obj as XafDataViewRecord;
+            if (viewRecord != null)
+                return GetObject(viewRecord);
+            else
+                return GetObjectByObject(obj);
+
+        }
+
+        private object GetObject(XafDataViewRecord dataViewRecord)
+        {
+            ITypeInfo objectTypeInfo = TypesInfo.FindTypeInfo(GetOriginalType(dataViewRecord.ObjectType));
+            if (objectTypeInfo.KeyMembers.Count > 1)
+            {
+                List<Object> keyMemberValues = new List<Object>();
+                foreach (IMemberInfo keyMemberInfo in objectTypeInfo.KeyMembers)
+                {
+                    keyMemberValues.Add(dataViewRecord[keyMemberInfo.Name]);
+                }
+                return GetObjectByKey(dataViewRecord.ObjectType, keyMemberValues);
+            }
+            else
+            {
+                Object keyMemberValue = dataViewRecord[GetKeyPropertyName(dataViewRecord.ObjectType)];
+                return GetObjectByKey(dataViewRecord.ObjectType, keyMemberValue);
+            }
+        }
+        private object GetObjectByObject(object objectFromDifferentObjectSpace)
         {
             if (objectFromDifferentObjectSpace == null)
                 return null;
