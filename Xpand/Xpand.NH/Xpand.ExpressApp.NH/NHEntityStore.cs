@@ -7,6 +7,7 @@ using DevExpress.Persistent.Base;
 using Xpand.ExpressApp.NH.Core;
 using System.ComponentModel;
 using System.Globalization;
+using System.Collections.Concurrent;
 
 namespace Xpand.ExpressApp.NH
 {
@@ -16,6 +17,7 @@ namespace Xpand.ExpressApp.NH
         private readonly ITypesInfo typesInfo;
         private readonly IPersistenceManager persistenceManager;
         private IList<ITypeMetadata> metadata;
+        private static readonly ConcurrentBag<Type> ignoredTypes = new ConcurrentBag<Type>();
 
         public NHEntityStore(ITypesInfo typesInfo, IPersistenceManager persistenceManager)
         {
@@ -29,7 +31,10 @@ namespace Xpand.ExpressApp.NH
         public new void EnumMembers(TypeInfo info, EnumMembersHandler handler)
         {
             foreach (var property in GetPropertyDescriptors(info.Type))
-                handler(property, property.Name);
+            {
+                if (CanRegister(property.PropertyType))
+                    handler(property, property.Name);
+            }
         }
 
 
@@ -46,9 +51,16 @@ namespace Xpand.ExpressApp.NH
             }
         }
 
+
+        public static void AddIgnoredType(Type type)
+        {
+            if (!ignoredTypes.Contains(type))
+                ignoredTypes.Add(type);
+        }
+
         public bool CanRegister(Type type)
         {
-            return true;
+            return !ignoredTypes.Contains(type);
         }
 
 
@@ -58,7 +70,6 @@ namespace Xpand.ExpressApp.NH
             TypeInfo typeInfo = (TypeInfo)typesInfo.FindTypeInfo(type);
             typeInfo.Source = this;
             typeInfo.IsPersistent = Metadata.Any(tm => tm.Type == type);
-
             typeInfo.Refresh();
             typeInfo.RefreshMembers();
         }
@@ -78,7 +89,6 @@ namespace Xpand.ExpressApp.NH
         {
             base.InitMemberInfo(member, memberInfo);
             if (memberInfo.Owner.IsInterface) return;
-
             var typeMetadata = Metadata.FirstOrDefault(tm => memberInfo.Owner.Type.IsAssignableFrom(tm.Type));
 
             PropertyDescriptor descriptor = member as PropertyDescriptor;
@@ -118,6 +128,7 @@ namespace Xpand.ExpressApp.NH
             }
         }
 
+
         private void InitializeOneToMany(XafMemberInfo memberInfo)
         {
             var associatedTypeInfo = typesInfo.FindTypeInfo(memberInfo.ListElementType);
@@ -139,7 +150,7 @@ namespace Xpand.ExpressApp.NH
 
         private bool IsListOfType(Type listType, Type elementType)
         {
-            if (listType.HasElementType) 
+            if (listType.HasElementType)
                 return listType.GetElementType() == elementType;
 
             return typeof(IEnumerable<>).MakeGenericType(elementType).IsAssignableFrom(listType);
