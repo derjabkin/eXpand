@@ -172,9 +172,7 @@ namespace Xpand.ExpressApp.NH
                 memberInfo.AssociatedMemberInfo.AssociatedMemberInfo = memberInfo;
                 memberInfo.IsAggregated = false;
             }
-            else
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture,
-                    "No owner reference found for the collection {0}", memberInfo.Name));
+         
         }
         private static void InitializeKeyProperty(XafMemberInfo memberInfo)
         {

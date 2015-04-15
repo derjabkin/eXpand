@@ -95,7 +95,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
                 return configuration;
             }
         }
-        private FluentConfiguration GetConfiguration(string connectionString)
+        protected virtual FluentConfiguration GetConfiguration(string connectionString)
         {
             return Fluently.Configure()
                            .Database(GetDatabaseConfiguration(connectionString))
@@ -112,18 +112,6 @@ namespace Xpand.ExpressApp.NH.DataLayer
         {
             mappingAssemblies.ForEach(a => m.FluentMappings.AddFromAssembly(a));
             mappingTypes.ForEach(t => m.FluentMappings.Add(t));
-        }
-
-        private static Property GetPropertyOrNull(PersistentClass classMapping, string propertyName)
-        {
-            try
-            {
-                return classMapping.GetProperty(propertyName);
-            }
-            catch (MappingException)
-            {
-                return null;
-            }
         }
 
 
@@ -191,7 +179,6 @@ namespace Xpand.ExpressApp.NH.DataLayer
         private static TypeMetadata CreateTypeMetadata(PersistentClass cm, ICollection<NHibernate.Mapping.Collection> collectionMappings)
         {
             var result = new TypeMetadata { Type = cm.MappedClass };
-
             result.KeyProperty = AddPropertyMetadata(result, cm.IdentifierProperty);
             string classFullName = cm.MappedClass.FullName;
             foreach (var collectionMapping in collectionMappings)
@@ -205,11 +192,10 @@ namespace Xpand.ExpressApp.NH.DataLayer
                     });
                 }
             }
-            foreach (var property in cm.PropertyIterator)
+            foreach (var property in cm.PropertyIterator.Concat(cm.ReferenceablePropertyIterator))
             {
                 AddPropertyMetadata(result, property);
             }
-
 
             return result;
         }

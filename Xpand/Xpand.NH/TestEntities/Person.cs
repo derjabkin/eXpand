@@ -13,6 +13,11 @@ namespace TestEntities
     {
         private List<PhoneNumber> phoneNumbers;
 
+        public Person()
+        {
+            Address = new Address();
+        }
+
         [DataMember]
         public Guid Id { get; set; }
 
@@ -36,6 +41,18 @@ namespace TestEntities
                     phoneNumbers = new List<PhoneNumber>();
 
                 return phoneNumbers;
+            }
+        }
+
+        private Address address;
+        [DataMember, ExpandObjectMembers(ExpandObjectMembers.Always)]
+        public Address Address
+        {
+            get { return address; }
+            set
+            {
+                if (value != null)
+                    address = value;
             }
         }
     }
