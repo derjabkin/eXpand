@@ -3,6 +3,7 @@ using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp.Security;
 using DevExpress.ExpressApp.Utils;
+using DevExpress.Persistent.Base;
 using DevExpress.Xpo;
 using DevExpress.Xpo.DB;
 using System;
@@ -348,18 +349,29 @@ namespace Xpand.ExpressApp.NH
             return result;
         }
 
-        private IList<string> GetSimplePropertiesNames(Type objectType)
+
+        private static bool IsExpandedMember(IMemberInfo info)
+        {
+            var attr = info.FindAttribute<ExpandObjectMembersAttribute>();
+            return attr != null && (attr.ExpandingMode & ExpandObjectMembers.InListView) == ExpandObjectMembers.InListView;
+        }
+        private IEnumerable<string> GetExpandedObjectFields(ITypeInfo typeInfo)
+        {
+            return typeInfo.Members.Where(IsExpandedMember).SelectMany(m => GetViewPropertiesNames(m.MemberType, m.Name + "."));
+        }
+        private IList<string> GetViewPropertiesNames(Type objectType, string prefix)
         {
             var typeInfo = TypesInfo.FindTypeInfo(objectType);
             Guard.ArgumentNotNull(typeInfo, "typeInfo");
 
-            return typeInfo.Members.Where(m => m.IsPersistent && (m.MemberType.IsValueType || m.MemberType == typeof(string))).Select(m => m.Name).ToArray();
+            return typeInfo.Members.Where(m => m.IsPersistent && !m.IsAssociation).Select(m => prefix  + m.Name).Concat(GetExpandedObjectFields(typeInfo)).ToArray();
         }
         protected override IList CreateDataViewCore(Type objectType, IList<DataViewExpression> expressions, CriteriaOperator criteria, IList<SortProperty> sorting)
         {
 
             if (expressions == null || expressions.Count == 0)
-                expressions = GetSimplePropertiesNames(objectType).Select(pn => new DataViewExpression(pn, new OperandProperty(pn))).ToArray();
+                expressions = GetViewPropertiesNames(objectType, string.Empty)
+                    .Select(pn => new DataViewExpression(pn, new OperandProperty(pn))).ToArray();
 
             return new NHDataView(this, objectType, expressions, criteria, sorting);
         }

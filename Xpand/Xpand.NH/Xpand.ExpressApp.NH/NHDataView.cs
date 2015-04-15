@@ -9,14 +9,12 @@ namespace Xpand.ExpressApp.NH
 {
     public class NHDataView : XafDataView
     {
-        private IList<CriteriaOperator> propertyNames;
-
         public NHDataView(IObjectSpace objectSpace, Type objectType, IList<DevExpress.ExpressApp.Utils.DataViewExpression> expressions, DevExpress.Data.Filtering.CriteriaOperator criteria, IList<DevExpress.Xpo.SortProperty> sorting)
             : base(objectSpace, objectType, expressions, criteria, sorting)
         {
         }
 
-        
+
         protected override void InitObjects()
         {
             if (objects == null)
@@ -25,10 +23,8 @@ namespace Xpand.ExpressApp.NH
 
                 NHObjectSpace os = (NHObjectSpace)objectSpace;
                 objects = new List<XafDataViewRecord>();
-                propertyNames = expressions.Select(dve => dve.Expression).ToArray();
-           
-                
-                var persistentObjects = os.GetObjects(objectType, propertyNames, criteria, sorting, topReturnedObjectsCount);
+
+                var persistentObjects = os.GetObjects(objectType, expressions.Select(dve => dve.Expression).ToArray(), criteria, sorting, topReturnedObjectsCount);
                 foreach (var obj in persistentObjects)
                 {
                     var record = new NHDataViewRecord(this, obj);
