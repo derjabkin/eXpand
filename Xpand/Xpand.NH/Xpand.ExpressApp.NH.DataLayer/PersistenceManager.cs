@@ -219,18 +219,33 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
             StringBuilder sb = new StringBuilder();
 
+            List<string> joinObjects = new List<string>();
             if (members != null && members.Count > 0)
             {
                 sb.Append("select ");
                 NHWhereGenerator whereGenerator = new NHWhereGenerator();
-                foreach(var member in members)
+                foreach (var member in members)
                 {
-                    sb.AppendFormat(CultureInfo.InvariantCulture, "m.{0},", whereGenerator.Process(member));
+                    string memberName = whereGenerator.Process(member);
+                    string[] parts = memberName.Split(new[] { '.' }, 2);
+                    if (parts.Length == 1)
+                        sb.AppendFormat(CultureInfo.InvariantCulture, "m.{0},", memberName);
+                    else
+                    {
+                        if (!joinObjects.Contains(parts[0]))
+                            joinObjects.Add(parts[0]);
+                        sb.AppendFormat(CultureInfo.InvariantCulture, "m{0}.{1},", joinObjects.IndexOf(parts[0]), parts[1]);
+
+                    }
                 }
                 sb.Length--;
                 sb.Append(" ");
             }
             sb.AppendFormat(CultureInfo.InvariantCulture, "FROM {0} as m \r\n", objectType.Name);
+            for (int i = 0; i < joinObjects.Count; i++)
+            {
+                sb.AppendFormat(CultureInfo.InvariantCulture, "left join m.{0} as m{1}\r\n", joinObjects[i], i);
+            }
 
             var metadata = this.GetMetadata().FirstOrDefault(md => md.Type == objectType);
             if (metadata != null)
