@@ -65,7 +65,7 @@ namespace Xpand.ExpressApp.NH.Service
             return PersistenceManager.GetObjects(typeName, members, criteria, sorting, topReturnedObjectsCount);
         }
 
-        public int GetObjectsCount(string typeName, string criteria)
+        public virtual int GetObjectsCount(string typeName, string criteria)
         {
             return PersistenceManager.GetObjectsCount(typeName, criteria);
         }

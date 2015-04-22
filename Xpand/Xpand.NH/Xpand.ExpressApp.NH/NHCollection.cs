@@ -97,9 +97,11 @@ namespace Xpand.ExpressApp.NH
                 }
             }
         }
+
+        private bool AreObjectsInitialized { get { return objects != null; } }
         protected void InitObjects()
         {
-            if (objects == null)
+            if (!AreObjectsInitialized)
             {
                 objects = new List<Object>();
                 if (topReturnedObjectsCount == 0)
@@ -473,8 +475,10 @@ namespace Xpand.ExpressApp.NH
                 }
                 else
                 {
-                    InitObjects();
-                    return objects.Count;
+                    if (AreObjectsInitialized)
+                        return objects.Count;
+                    else
+                        return objectSpace.GetObjectsCount(objectType, Criteria);
                 }
             }
         }

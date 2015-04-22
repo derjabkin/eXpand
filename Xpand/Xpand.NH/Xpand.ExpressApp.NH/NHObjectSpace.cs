@@ -157,7 +157,8 @@ namespace Xpand.ExpressApp.NH
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
-            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName, criteria.ToString());
+            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName, 
+                !object.ReferenceEquals(null, criteria) ?  criteria.ToString() : null);
 
 
         }
