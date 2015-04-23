@@ -14,6 +14,8 @@ using Xpand.ExpressApp.NH.Core;
 using DevExpress.Utils;
 using System.Globalization;
 using DevExpress.Data.Filtering;
+using NHibernate.Linq;
+using System.Linq.Expressions;
 
 namespace Xpand.ExpressApp.NH.DataLayer
 {
@@ -301,6 +303,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
             return metadata.KeyProperty.Name;
         }
+
         public int GetObjectsCount(string typeName, string criteria)
         {
             Guard.ArgumentIsNotNullOrEmpty(typeName, "typeName");
@@ -317,5 +320,22 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
 
         }
+
+
+        public object ExecuteExpression(Serialize.Linq.Nodes.ExpressionNode expressionNode)
+        {
+            using (var session = SessionFactory.OpenSession())
+            {
+                var query = session.Query<object>();
+                var expression = expressionNode.ToExpression(new NHExpressionContext(session));
+                var result = query.Provider.Execute(expression);
+                IEnumerable enumerable = result as IEnumerable;
+                if (enumerable != null)
+                    return enumerable.Cast<object>().ToArray();
+                else
+                    return result;
+            }
+        }
     }
+
 }

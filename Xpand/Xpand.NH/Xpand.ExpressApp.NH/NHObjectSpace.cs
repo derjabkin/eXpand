@@ -15,10 +15,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using Xpand.ExpressApp.NH.Core;
+using Serialize.Linq.Extensions;
+using Serialize.Linq.Nodes;
 
 namespace Xpand.ExpressApp.NH
 {
-    public class NHObjectSpace : BaseObjectSpace, IObjectSpace
+    public class NHObjectSpace : BaseObjectSpace, IObjectSpace, IExpressionExecutor
     {
 
         public const Int32 UnableToOpenDatabaseErrorNumber = 4060;
@@ -100,7 +102,7 @@ namespace Xpand.ExpressApp.NH
 
         public object CreateServerCollection(Type objectType, DevExpress.Data.Filtering.CriteriaOperator criteria)
         {
-            throw new NotImplementedException();
+            return new NHServerCollection(this, objectType, criteria, null);
         }
 
         public string Database
@@ -157,8 +159,8 @@ namespace Xpand.ExpressApp.NH
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
-            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName, 
-                !object.ReferenceEquals(null, criteria) ?  criteria.ToString() : null);
+            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName,
+                !object.ReferenceEquals(null, criteria) ? criteria.ToString() : null);
 
 
         }
@@ -365,7 +367,7 @@ namespace Xpand.ExpressApp.NH
             var typeInfo = TypesInfo.FindTypeInfo(objectType);
             Guard.ArgumentNotNull(typeInfo, "typeInfo");
 
-            return typeInfo.Members.Where(m => m.IsPersistent && !m.IsAssociation).Select(m => prefix  + m.Name).Concat(GetExpandedObjectFields(typeInfo)).ToArray();
+            return typeInfo.Members.Where(m => m.IsPersistent && !m.IsAssociation).Select(m => prefix + m.Name).Concat(GetExpandedObjectFields(typeInfo)).ToArray();
         }
         protected override IList CreateDataViewCore(Type objectType, IList<DataViewExpression> expressions, CriteriaOperator criteria, IList<SortProperty> sorting)
         {
@@ -713,6 +715,18 @@ namespace Xpand.ExpressApp.NH
                 AddObject(result, InstanceState.Unchanged);
 
             return result;
+        }
+
+        internal IQueryable GetObjectQuery(Type type, IList<String> memberNames, CriteriaOperator criteria, IList<SortProperty> sorting)
+        {
+            return (IQueryable)Activator.CreateInstance(typeof(RemoteObjectQuery<>).MakeGenericType(type), new RemoteQueryProvider(this));
+        }
+
+
+        public object Execute(System.Linq.Expressions.Expression expression)
+        {
+            NHNodeFactory factory = new NHNodeFactory();
+            return persistenceManager.ExecuteExpression(factory.Create(expression));
         }
     }
 }

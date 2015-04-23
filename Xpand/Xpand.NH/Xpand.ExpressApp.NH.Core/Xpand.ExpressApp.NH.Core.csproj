@@ -66,6 +66,9 @@
     <Reference Include="DevExpress.Utils.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Utils.v14.2.dll</HintPath>
     </Reference>
+    <Reference Include="Serialize.Linq">
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Serialize.Linq.1.2.3\lib\net40\Serialize.Linq.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
@@ -77,14 +80,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConstantSubstitutionNode.cs" />
     <Compile Include="CriteriaOperator.cs" />
     <Compile Include="IPersistenceManager.cs" />
     <Compile Include="IPersistenceManagerProvider.cs" />
     <Compile Include="IPropertyMetadata.cs" />
+    <Compile Include="IExpressionExecutor.cs" />
     <Compile Include="ISortPropertyInfo.cs" />
+    <Compile Include="ISubstitutionExpressionContext.cs" />
     <Compile Include="ITypeMetadata.cs" />
+    <Compile Include="NHNodeFactory.cs" />
     <Compile Include="PropertyMetadata.cs" />
     <Compile Include="RelationType.cs" />
+    <Compile Include="RemoteObjectQuery.cs" />
+    <Compile Include="RemoteQueryProvider.cs" />
     <Compile Include="SortPropertyInfo.cs" />
     <Compile Include="TypeMetadata.cs" />
     <Compile Include="XpandDataContractResolver.cs" />

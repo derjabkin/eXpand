@@ -1,4 +1,5 @@
 ﻿using DevExpress.Data.Filtering;
+using Serialize.Linq.Nodes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,5 +26,8 @@ namespace Xpand.ExpressApp.NH.Core
 
         [OperationContract]
         int GetObjectsCount(string typeName, string criteria);
+
+        [OperationContract]
+        object ExecuteExpression(ExpressionNode expressionNode);
     }
 }

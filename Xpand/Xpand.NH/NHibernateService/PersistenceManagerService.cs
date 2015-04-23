@@ -69,5 +69,11 @@ namespace Xpand.ExpressApp.NH.Service
         {
             return PersistenceManager.GetObjectsCount(typeName, criteria);
         }
+
+
+        public object ExecuteExpression(Serialize.Linq.Nodes.ExpressionNode expressionNode)
+        {
+            return PersistenceManager.ExecuteExpression(expressionNode);
+        }
     }
 }
