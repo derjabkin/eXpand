@@ -39,6 +39,26 @@ namespace Xpand.ExpressApp.Module
             AdditionalExportedTypes.Add(typeof(ObjectPermission));
             AdditionalExportedTypes.Add(typeof(Address));
         }
+
+        public override void CustomizeTypesInfo(ITypesInfo typesInfo)
+        {
+            if (typesInfo == null)
+                throw new ArgumentNullException("typesInfo");
+
+            base.CustomizeTypesInfo(typesInfo);
+
+            SetAdditionalExportedTypesProperties(typesInfo);
+        }
+
+        private void SetAdditionalExportedTypesProperties(ITypesInfo typesInfo)
+        {
+            foreach (var type in AdditionalExportedTypes)
+            {
+                var typeInfo = (TypeInfo)typesInfo.FindTypeInfo(type);
+                typeInfo.IsDomainComponent = true;
+            }
+        }
+
         public override IEnumerable<ModuleUpdater> GetModuleUpdaters(IObjectSpace objectSpace, Version versionFromDB)
         {
             ModuleUpdater updater = new DatabaseUpdate.Updater(objectSpace, versionFromDB);

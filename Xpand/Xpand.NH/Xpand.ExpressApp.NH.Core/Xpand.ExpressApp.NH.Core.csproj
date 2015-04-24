@@ -96,6 +96,7 @@
     <Compile Include="RemoteQueryProvider.cs" />
     <Compile Include="SortPropertyInfo.cs" />
     <Compile Include="TypeMetadata.cs" />
+    <Compile Include="TypeSystem.cs" />
     <Compile Include="XpandDataContractResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XpandDataContractSerializerOperationBehavior .cs" />

@@ -64,12 +64,17 @@ namespace Xpand.ExpressApp.NH
         }
 
 
+        private bool IsTypePersistent(Type type)
+        {
+            return Metadata.Any(tm => tm.Type == type);
+        }
+
         public void RegisterEntity(Type type)
         {
             types.Add(type);
             TypeInfo typeInfo = (TypeInfo)typesInfo.FindTypeInfo(type);
             typeInfo.Source = this;
-            typeInfo.IsPersistent = Metadata.Any(tm => tm.Type == type);
+            typeInfo.IsPersistent = IsTypePersistent(type);
             typeInfo.Refresh();
             typeInfo.RefreshMembers();
         }
@@ -83,6 +88,7 @@ namespace Xpand.ExpressApp.NH
         public override void InitTypeInfo(TypeInfo info)
         {
             base.InitTypeInfo(info);
+            info.IsDomainComponent = IsTypePersistent(info.Type);
         }
 
         public override void InitMemberInfo(object member, XafMemberInfo memberInfo)

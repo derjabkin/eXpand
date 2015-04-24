@@ -465,6 +465,8 @@ namespace Xpand.ExpressApp.NH
             InitObjects();
             ((IList)objects).CopyTo(array, index);
         }
+
+        private int? calculatedObjectsCount;
         public Int32 Count
         {
             get
@@ -478,7 +480,12 @@ namespace Xpand.ExpressApp.NH
                     if (AreObjectsInitialized)
                         return objects.Count;
                     else
-                        return objectSpace.GetObjectsCount(objectType, Criteria);
+                    {
+                        if (!calculatedObjectsCount.HasValue)
+                            calculatedObjectsCount = objectSpace.GetObjectsCount(objectType, Criteria);
+
+                        return calculatedObjectsCount.Value;
+                    }
                 }
             }
         }

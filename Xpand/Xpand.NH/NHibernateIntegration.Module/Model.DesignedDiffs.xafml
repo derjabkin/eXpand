@@ -4,6 +4,11 @@
     <SchemaModule Name="SystemModule" Version="14.2.6.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
-    <ListView Id="Person_ListView" DataAccessMode="Server" />
+    <ListView Id="Person_ListView" DataAccessMode="Server">
+      <Filters>
+        <Filter Id="@57dd4fbc-16ae-41de-9a38-07f96dd66f33" Criteria="[PhoneNumbers][StartsWith([Number], '1')]" Caption="1-Phone Numbers" IsNewNode="True" />
+        <Filter Id="@d1d78bb2-5e6e-4a97-8a43-e54ed9a58731" Caption="All" IsNewNode="True" />
+      </Filters>
+    </ListView>
   </Views>
 </Application>
