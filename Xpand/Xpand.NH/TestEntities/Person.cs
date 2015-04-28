@@ -33,6 +33,10 @@ namespace TestEntities
         public string NonpersistentProperty { get; set; }
 
         [DataMember]
+        [DataSourceCriteria("FirstName<>'Sergej'")]
+        public Person Manager { get; set; }
+
+        [DataMember]
         public IList<PhoneNumber> PhoneNumbers
         {
             get
