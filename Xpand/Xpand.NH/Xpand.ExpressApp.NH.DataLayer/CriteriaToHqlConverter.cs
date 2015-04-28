@@ -45,7 +45,7 @@ using System.Reflection;
 using Xpand.ExpressApp.NH.Core;
 namespace Xpand.ExpressApp.NH.DataLayer
 {
-    public class CriteriaToHqlConverter : NHWhereGenerator
+    public class CriteriaToHqlConverter : CriteriaToBasicStyleParameterlessProcessor
     {
         private String currentTableName;
         private Type objectType;

@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Xpand.ExpressApp.NH.DataLayer
 {
-    public class NHWhereGenerator : CriteriaToStringParameterlessProcessor, ICriteriaVisitor
+    public class NHWhereGenerator : BaseWhereGenerator, ICriteriaVisitor
     {
         const string nullString = "null";
 

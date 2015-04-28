@@ -17,6 +17,9 @@ using System.Text;
 using Xpand.ExpressApp.NH.Core;
 using Serialize.Linq.Extensions;
 using Serialize.Linq.Nodes;
+using System.Reflection;
+using DevExpress.Data.Linq.Helpers;
+using DevExpress.Data;
 
 namespace Xpand.ExpressApp.NH
 {
@@ -54,7 +57,8 @@ namespace Xpand.ExpressApp.NH
 
         public void ApplyCriteria(object collection, DevExpress.Data.Filtering.CriteriaOperator criteria)
         {
-            DoIfNHCollection(collection, nhc => nhc.Criteria = criteria);
+            DoIfINHCollection(collection, nhc => nhc.Criteria = criteria);
+
         }
 
         public void ApplyFilter(object collection, DevExpress.Data.Filtering.CriteriaOperator filter)
@@ -97,7 +101,7 @@ namespace Xpand.ExpressApp.NH
 
         public IDisposable CreateParseCriteriaScope()
         {
-            throw new NotImplementedException();
+            return new ParseCriteriaScope();
         }
 
         public object CreateServerCollection(Type objectType, DevExpress.Data.Filtering.CriteriaOperator criteria)
@@ -296,6 +300,14 @@ namespace Xpand.ExpressApp.NH
         private void DoIfNHCollection(object collection, Action<NHCollection> action)
         {
             NHCollection nhCollection = collection as NHCollection;
+            if (nhCollection != null)
+            {
+                action(nhCollection);
+            }
+        }
+        private void DoIfINHCollection(object collection, Action<INHCollection> action)
+        {
+            INHCollection nhCollection = collection as INHCollection;
             if (nhCollection != null)
             {
                 action(nhCollection);
@@ -717,9 +729,40 @@ namespace Xpand.ExpressApp.NH
             return result;
         }
 
+        protected internal CriteriaOperator ProcessCriteria(Type objectType, CriteriaOperator criteria)
+        {
+            CriteriaOperator result = null;
+            if (!ReferenceEquals(criteria, null))
+            {
+                result = (CriteriaOperator)((ICloneable)criteria).Clone();
+                ObjectMemberValueCriteriaProcessor objectMemberValueCriteriaProcessor = new ObjectMemberValueCriteriaProcessor(typesInfo, objectType);
+                objectMemberValueCriteriaProcessor.Process(result);
+            }
+            return result;
+        }
+        private IQueryable GetObjectQueryT<T>(IList<String> memberNames, CriteriaOperator criteria, IList<SortProperty> sorting)
+        {
+            CriteriaOperator workCriteria = ProcessCriteria(typeof(T), criteria);
+            CriteriaToNHExpressionConverter converter = new CriteriaToNHExpressionConverter();
+            IQueryable objectQuery = new RemoteObjectQuery<T>(new RemoteQueryProvider(this));
+            
+            objectQuery = objectQuery.AppendWhere(converter, workCriteria);
+            if (sorting != null)
+            {
+                List<ServerModeOrderDescriptor> orderDescriptors = new List<ServerModeOrderDescriptor>();
+                foreach (SortProperty sortProperty in sorting)
+                {
+                    ServerModeOrderDescriptor orderDescriptor = new ServerModeOrderDescriptor(CriteriaOperator.Parse(sortProperty.PropertyName), (sortProperty.Direction == SortingDirection.Descending));
+                    orderDescriptors.Add(orderDescriptor);
+                }
+                objectQuery = objectQuery.MakeOrderBy(converter, orderDescriptors.ToArray());
+            }
+            return objectQuery;
+        }
         internal IQueryable GetObjectQuery(Type type, IList<String> memberNames, CriteriaOperator criteria, IList<SortProperty> sorting)
         {
-            return (IQueryable)Activator.CreateInstance(typeof(RemoteObjectQuery<>).MakeGenericType(type), new RemoteQueryProvider(this));
+            MethodInfo methodInfo = GetType().GetMethod("GetObjectQueryT", BindingFlags.Instance | BindingFlags.NonPublic).MakeGenericMethod(type);
+            return (IQueryable)methodInfo.Invoke(this, new Object[] { memberNames, criteria, sorting });
         }
 
 

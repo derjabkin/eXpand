@@ -49,7 +49,7 @@ using DevExpress.ExpressApp.DC;
 using DevExpress.ExpressApp;
 namespace Xpand.ExpressApp.NH
 {
-    public class NHServerCollection : ILinqServerModeFrontEndOwner, IListSource
+    public class NHServerCollection : ILinqServerModeFrontEndOwner, IListSource, INHCollection
     {
         private NHObjectSpace objectSpace;
         private Type objectType;

@@ -14,7 +14,7 @@ namespace Xpand.ExpressApp.NH.Core
 
         private readonly IQueryProvider provider;
 
-        public RemoteObjectQuery()
+        public RemoteObjectQuery()  
         {
 
         }

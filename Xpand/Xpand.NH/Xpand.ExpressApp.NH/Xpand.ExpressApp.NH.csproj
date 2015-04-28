@@ -188,7 +188,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingFactory.cs" />
+    <Compile Include="CriteriaToNHConverterHelper.cs" />
+    <Compile Include="CriteriaToNHExpressionConverter.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="INHCollection.cs" />
     <Compile Include="InstanceState.cs" />
     <Compile Include="NHCollectionT.cs" />
     <Compile Include="NHDataView.cs" />
@@ -201,7 +204,9 @@
     <Compile Include="NHPropertyCollectionSource.cs" />
     <Compile Include="NHServerCollection.cs" />
     <Compile Include="NHServerModeSourceAdderRemover.cs" />
+    <Compile Include="ObjectMemberValueCriteriaProcessor.cs" />
     <Compile Include="ObjectSpaceInstanceInfo.cs" />
+    <Compile Include="ParseCriteriaScope.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RemotePersistenceManagerProxy.cs" />
   </ItemGroup>

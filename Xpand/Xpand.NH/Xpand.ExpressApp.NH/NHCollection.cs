@@ -52,7 +52,7 @@ using DevExpress.ExpressApp;
 
 namespace Xpand.ExpressApp.NH
 {
-    public class NHCollection : ICancelAddNew, IBindingList, IList, ICollection, IEnumerable, ITypedList, IDisposable
+    public class NHCollection : ICancelAddNew, IBindingList, IList, ICollection, IEnumerable, ITypedList, IDisposable, INHCollection
     {
         private NHObjectSpace objectSpace;
         private Type objectType;
