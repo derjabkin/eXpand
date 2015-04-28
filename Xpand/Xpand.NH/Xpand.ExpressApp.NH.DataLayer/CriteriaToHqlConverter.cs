@@ -43,6 +43,8 @@ using DevExpress.Data.Filtering;
 using DevExpress.Data.Filtering.Helpers;
 using System.Reflection;
 using Xpand.ExpressApp.NH.Core;
+using DevExpress.Data.Db;
+using DevExpress.Xpo.DB.Helpers;
 namespace Xpand.ExpressApp.NH.DataLayer
 {
     public class CriteriaToHqlConverter : CriteriaToBasicStyleParameterlessProcessor
@@ -111,7 +113,8 @@ namespace Xpand.ExpressApp.NH.DataLayer
             this.objectType = objectType;
         }
 
-        public CriteriaToHqlConverter(Type objectType) : this(null, objectType)
+        public CriteriaToHqlConverter(Type objectType)
+            : this(null, objectType)
         {
 
         }
@@ -161,7 +164,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
             {
                 String collectionTableName = operand.CollectionProperty.PropertyName;
                 Xpand.ExpressApp.NH.DataLayer.CriteriaToHqlConverter criteriaToEFSqlConverter = new Xpand.ExpressApp.NH.DataLayer.CriteriaToHqlConverter(collectionTableName, GetListElementType(operand.CollectionProperty.PropertyName));
-                result = new CriteriaToStringVisitResult(String.Format("Exists(select value 1 from {0} as {1} where {2})",
+                result = new CriteriaToStringVisitResult(String.Format("Exists(from {0} as {1} where {2})",
                     Process(operand.CollectionProperty).Result,
                     collectionTableName,
                     criteriaToEFSqlConverter.Convert(operand.Condition)));
@@ -183,59 +186,51 @@ namespace Xpand.ExpressApp.NH.DataLayer
         }
         public override Object Visit(FunctionOperator theOperator)
         {
-            Object result = null;
-            if (theOperator.OperatorType == FunctionOperatorType.ToStr)
+            switch (theOperator.OperatorType)
             {
-                result = ConvertCastFunction(theOperator, typeof(String));
+                case FunctionOperatorType.ToStr:
+                    return ConvertCastFunction(theOperator, typeof(String));
+                case FunctionOperatorType.ToDecimal:
+                    return ConvertCastFunction(theOperator, typeof(Decimal));
+                case FunctionOperatorType.ToDouble:
+                    return ConvertCastFunction(theOperator, typeof(Double));
+                case FunctionOperatorType.ToFloat:
+                    return ConvertCastFunction(theOperator, typeof(Single));
+                case FunctionOperatorType.ToInt:
+                    return ConvertCastFunction(theOperator, typeof(Int32));
+                case FunctionOperatorType.ToLong:
+                    return ConvertCastFunction(theOperator, typeof(Int64));
+                case FunctionOperatorType.Iif:
+                    if (theOperator.Operands.Count >= 3)
+                    {
+                        return new CriteriaToStringVisitResult(
+                            String.Format("case when ({0}) then {1} else {2} end",
+                                Process(theOperator.Operands[0]).Result,
+                                Process(theOperator.Operands[1]).Result,
+                                Process(theOperator.Operands[2]).Result)
+                        );
+                    }
+                    else
+                    {
+                        return base.Visit(theOperator);
+                    }
+                case FunctionOperatorType.StartsWith:
+                    return new CriteriaToStringVisitResult(MsSqlFormatterHelper.FormatFunction(
+                        new ProcessParameter((o) => Process((CriteriaOperator)o).Result),
+                        theOperator.OperatorType,
+                        new MsSqlFormatterHelper.MSSqlServerVersion(false, false, false),
+                        theOperator.Operands.ToArray()));
+                default:
+                    object result;
+                    if (CriteriaToHqlConverterHelper.ConvertCustomFunctionToValue(theOperator, out result))
+                    {
+                        return new CriteriaToStringVisitResult(ValueToString(result));
+                    }
+                    else
+                    {
+                        return base.Visit(theOperator);
+                    }
             }
-            else if (theOperator.OperatorType == FunctionOperatorType.ToDecimal)
-            {
-                result = ConvertCastFunction(theOperator, typeof(Decimal));
-            }
-            else if (theOperator.OperatorType == FunctionOperatorType.ToDouble)
-            {
-                result = ConvertCastFunction(theOperator, typeof(Double));
-            }
-            else if (theOperator.OperatorType == FunctionOperatorType.ToFloat)
-            {
-                result = ConvertCastFunction(theOperator, typeof(Single));
-            }
-            else if (theOperator.OperatorType == FunctionOperatorType.ToInt)
-            {
-                result = ConvertCastFunction(theOperator, typeof(Int32));
-            }
-            else if (theOperator.OperatorType == FunctionOperatorType.ToLong)
-            {
-                result = ConvertCastFunction(theOperator, typeof(Int64));
-            }
-            else if (theOperator.OperatorType == FunctionOperatorType.Iif)
-            {
-                if (theOperator.Operands.Count >= 3)
-                {
-                    result = new CriteriaToStringVisitResult(
-                        String.Format("case when ({0}) then {1} else {2} end",
-                            Process(theOperator.Operands[0]).Result,
-                            Process(theOperator.Operands[1]).Result,
-                            Process(theOperator.Operands[2]).Result)
-                    );
-                }
-                else
-                {
-                    result = base.Visit(theOperator);
-                }
-            }
-            else
-            {
-                if (CriteriaToHqlConverterHelper.ConvertCustomFunctionToValue(theOperator, out result))
-                {
-                    result = new CriteriaToStringVisitResult(ValueToString(result));
-                }
-                else
-                {
-                    result = base.Visit(theOperator);
-                }
-            }
-            return result;
         }
         public override Object Visit(GroupOperator theOperator)
         {
@@ -251,10 +246,10 @@ namespace Xpand.ExpressApp.NH.DataLayer
         }
         public override Object Visit(OperandProperty operand)
         {
-            String result = operand.PropertyName;
+            string result = operand.PropertyName;
             if (!String.IsNullOrWhiteSpace(operand.PropertyName))
             {
-                result = operand.PropertyName;
+                result = currentTableName + "." + operand.PropertyName;
             }
             return new CriteriaToStringVisitResult(result);
         }

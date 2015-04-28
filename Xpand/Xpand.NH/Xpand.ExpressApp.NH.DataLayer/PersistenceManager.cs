@@ -267,7 +267,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
             if (!string.IsNullOrWhiteSpace(criteriaString))
             {
                 CriteriaOperator criteria = CriteriaOperator.Parse(criteriaString);
-                string hqlWhere = new CriteriaToHqlConverter(objectType).Convert(criteria);
+                string hqlWhere = new CriteriaToHqlConverter("m", objectType).Convert(criteria);
                 sb.AppendFormat(CultureInfo.InvariantCulture, "Where {0}\r\n", hqlWhere);
             }
             return sb;
