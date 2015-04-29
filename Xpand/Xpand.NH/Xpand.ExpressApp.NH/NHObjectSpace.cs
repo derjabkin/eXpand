@@ -498,7 +498,11 @@ namespace Xpand.ExpressApp.NH
         {
             Guard.ArgumentNotNull(instance, "instance");
             if (instances.ContainsKey(instance)) return;
+            object keyValue = GetKeyValue(instance);
+            Type instanceType = instance.GetType();
 
+            if (instances.Values.Any(ii => instanceType.IsInstanceOfType(ii.Instance) && GetKeyValue(ii.Instance) == keyValue))
+                throw new ArgumentException("Instance with of the same type and key already added.", "instance");
 
             instances.Add(instance, new ObjectSpaceInstanceInfo { Instance = instance, State = state });
             var typeInfo = TypesInfo.FindTypeInfo(instance.GetType());
@@ -508,11 +512,17 @@ namespace Xpand.ExpressApp.NH
                     .OfType<IList>())
                 MergeWithExistingInstances(list, state);
 
-            AddObjects(
-                typeInfo.Members.Where(m => m.IsAssociation && !m.IsList)
-                    .Select(m => m.GetValue(instance))
-                    .Where(v => v != null), state);
 
+            foreach (var member in typeInfo.Members.Where(m => m.IsAssociation && !m.IsList && !m.IsReadOnly))
+            {
+                var obj = member.GetValue(instance);
+                if (obj != null)
+                {
+                    var addedObj = AddOrGetExistingInstance(obj, state);
+                    if (!ReferenceEquals(addedObj, obj))
+                        member.SetValue(instance, addedObj);
+                }
+            }
         }
         protected override object CreateObjectCore(Type type)
         {
@@ -650,10 +660,15 @@ namespace Xpand.ExpressApp.NH
                 GetInstanceInfoSafe(obj).State = InstanceState.Changed;
         }
 
+        private bool IsPersistent(Type type)
+        {
+            var typeInfo = TypesInfo.FindTypeInfo(type);
+            return typeInfo != null && typeInfo.IsPersistent;
+        }
+
         private bool IsPersistent(object obj)
         {
-            var typeInfo = TypesInfo.FindTypeInfo(obj.GetType());
-            return typeInfo != null && typeInfo.IsPersistent;
+            return obj != null && IsPersistent(obj.GetType());
         }
 
         public override String GetKeyValueAsString(Object obj)
@@ -745,7 +760,7 @@ namespace Xpand.ExpressApp.NH
             CriteriaOperator workCriteria = ProcessCriteria(typeof(T), criteria);
             CriteriaToNHExpressionConverter converter = new CriteriaToNHExpressionConverter();
             IQueryable objectQuery = new RemoteObjectQuery<T>(new RemoteQueryProvider(this));
-            
+
             objectQuery = objectQuery.AppendWhere(converter, workCriteria);
             if (sorting != null)
             {
@@ -769,7 +784,19 @@ namespace Xpand.ExpressApp.NH
         public object Execute(System.Linq.Expressions.Expression expression)
         {
             NHNodeFactory factory = new NHNodeFactory();
-            return persistenceManager.ExecuteExpression(factory.Create(expression));
+            var result = persistenceManager.ExecuteExpression(factory.Create(expression));
+            IList list = result as IList;
+            if (list != null && list.Cast<object>().Select(o => o.GetType()).Distinct().Count() == 1)
+            {
+
+                var persistentObjects = list.OfType<object>().Where(o => IsPersistent(o)).ToArray();
+                if (persistentObjects.Length > 0)
+                {
+                    AddToCache(persistentObjects[0].GetType(), persistentObjects);
+                }
+            }
+
+            return result;
         }
     }
 }
