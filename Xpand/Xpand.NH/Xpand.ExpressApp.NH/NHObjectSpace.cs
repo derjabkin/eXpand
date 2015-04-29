@@ -794,6 +794,8 @@ namespace Xpand.ExpressApp.NH
                 {
                     AddToCache(persistentObjects[0].GetType(), persistentObjects);
                 }
+
+                return persistentObjects;
             }
 
             return result;
