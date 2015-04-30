@@ -33,7 +33,8 @@ namespace TestEntities
         public string NonpersistentProperty { get; set; }
 
         [DataMember]
-        [DataSourceCriteria("[PhoneNumbers][StartsWith([Number], '1')]")]
+        //[DataSourceCriteria("[PhoneNumbers][StartsWith([Number], '1')]")]
+        [DataSourceCriteria("Id<>'@This.Id'")]
         public Person Manager { get; set; }
 
         [DataMember]

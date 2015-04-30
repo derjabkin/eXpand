@@ -45,6 +45,7 @@ using System.Reflection;
 using Xpand.ExpressApp.NH.Core;
 using DevExpress.Data.Db;
 using DevExpress.Xpo.DB.Helpers;
+using System.Globalization;
 namespace Xpand.ExpressApp.NH.DataLayer
 {
     public class CriteriaToHqlConverter : CriteriaToBasicStyleParameterlessProcessor
@@ -86,6 +87,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
                 return base.GetFunctionText(operatorType);
             }
         }
+
         protected override String GetInText()
         {
             return base.GetInText();
@@ -255,28 +257,30 @@ namespace Xpand.ExpressApp.NH.DataLayer
         }
         public override Object Visit(OperandValue operand)
         {
-            Object result = null;
             if (operand is OperandParameter)
             {
                 if (operand.Value is DateTime)
                 {
-                    result = new CriteriaToStringVisitResult("DateTime'" + ((DateTime)operand.Value).ToString("yyyy-MM-dd HH:mm:ss.fffff") + "'");
+                    return new CriteriaToStringVisitResult("DateTime'" + ((DateTime)operand.Value).ToString("yyyy-MM-dd HH:mm:ss.fffff") + "'");
                 }
                 else
                 {
-                    result = new CriteriaToStringVisitResult(ValueToString(operand.Value));
+                    return new CriteriaToStringVisitResult(ValueToString(operand.Value));
                 }
             }
-            else if ((operand is OperandValue) && (operand.Value != null) && operand.Value.GetType().IsEnum)
+            else if ((operand.Value != null))
             {
-                result = new CriteriaToStringVisitResult(
-                    String.Format("Cast({0} as {1})", ValueToString(System.Convert.ToInt64(operand.Value)), operand.Value.GetType().FullName));
+                if (operand.Value.GetType().IsEnum)
+                {
+                    return new CriteriaToStringVisitResult(
+                        String.Format("Cast({0} as {1})", ValueToString(System.Convert.ToInt64(operand.Value)), operand.Value.GetType().FullName));
+                }
+                else if (operand.Value is Guid)
+                {
+                    return new CriteriaToStringVisitResult(string.Format(CultureInfo.InvariantCulture, "'{0}'", operand.Value));
+                }
             }
-            else
-            {
-                result = base.Visit(operand);
-            }
-            return result;
+            return base.Visit(operand);
         }
         public override Object Visit(QueryOperand operand)
         {

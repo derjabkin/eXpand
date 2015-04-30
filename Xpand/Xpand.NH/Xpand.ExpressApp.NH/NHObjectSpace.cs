@@ -159,12 +159,18 @@ namespace Xpand.ExpressApp.NH
             return GetKeyMemberProperty(type, mi => mi.MemberType);
         }
 
+
+        private static string ConvertToString(CriteriaOperator criteria)
+        {
+            CriteriaToStringWrapperSubstituteProcessor processor = new CriteriaToStringWrapperSubstituteProcessor();
+            return processor.ConvertToString(criteria);
+        }
         public int GetObjectsCount(Type objectType, DevExpress.Data.Filtering.CriteriaOperator criteria)
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
             return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName,
-                !object.ReferenceEquals(null, criteria) ? criteria.ToString() : null);
+                !object.ReferenceEquals(null, criteria) ? ConvertToString(criteria) : null);
 
 
         }
@@ -439,7 +445,8 @@ namespace Xpand.ExpressApp.NH
             if (!ReferenceEquals(null, criteria))
                 secureCriteria.Add(criteria);
 
-            string criteriaString = secureCriteria.Count > 0 ? CriteriaOperator.And(secureCriteria).ToString() : null;
+            string criteriaString = secureCriteria.Count > 0 ? 
+                ConvertToString(CriteriaOperator.And(secureCriteria)) : null;
 
             var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, memberNames, criteriaString,
                 sortInfos, topReturnedObjectsCount);
