@@ -10,9 +10,9 @@ namespace Xpand.ExpressApp.NH.Service
     [XpandDataContractSerializer(true)]
     public class PersistenceManagerService : IPersistenceManagerService
     {
-        private PersistenceManager persistenceManager;
+        private NHPersistenceManager persistenceManager;
 
-        private PersistenceManager PersistenceManager
+        private NHPersistenceManager PersistenceManager
         {
             get
             {
@@ -30,9 +30,9 @@ namespace Xpand.ExpressApp.NH.Service
             }
         }
 
-        protected virtual PersistenceManager CreatePersistenceManager()
+        protected virtual NHPersistenceManager CreatePersistenceManager()
         {
-            return new PersistenceManager(ConnectionString);
+            return new NHPersistenceManager(ConnectionString);
         }
 
         protected string ConnectionString

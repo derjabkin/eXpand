@@ -21,7 +21,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
 {
 
 
-    public class PersistenceManager : IPersistenceManager
+    public class NHPersistenceManager : IPersistenceManager
     {
 
         private readonly string connectionString;
@@ -32,7 +32,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
         private static Configuration configuration;
         private readonly object configurationLock = new object();
 
-        public PersistenceManager(string connectionString)
+        public NHPersistenceManager(string connectionString)
         {
             if (connectionString == null)
                 throw new ArgumentNullException("connectionString");

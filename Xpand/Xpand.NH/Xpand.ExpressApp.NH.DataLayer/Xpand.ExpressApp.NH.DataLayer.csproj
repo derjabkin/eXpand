@@ -96,7 +96,7 @@
     <Compile Include="CriteriaToHqlConverter.cs" />
     <Compile Include="NHExpressionContext.cs" />
     <Compile Include="NHWhereGenerator.cs" />
-    <Compile Include="PersistenceManager.cs" />
+    <Compile Include="NHPersistenceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
