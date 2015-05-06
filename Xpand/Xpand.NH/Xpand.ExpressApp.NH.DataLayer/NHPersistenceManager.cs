@@ -223,7 +223,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
             return propertyMetadata;
         }
 
-        private StringBuilder CreateFromAndWhereHql(Type objectType, IList<CriteriaOperator> members, string criteriaString)
+        private StringBuilder CreateFromAndWhereHql(Type objectType, IList<CriteriaOperator> members, string criteriaString, bool addSelect)
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
@@ -242,13 +242,16 @@ namespace Xpand.ExpressApp.NH.DataLayer
                         sb.AppendFormat(CultureInfo.InvariantCulture, "m.{0},", memberName);
                     else
                     {
-                        sb.AppendFormat(CultureInfo.InvariantCulture, "{0},",memberName);
+                        sb.AppendFormat(CultureInfo.InvariantCulture, "{0},", memberName);
 
                     }
                 }
                 sb.Length--;
                 sb.Append(" ");
             }
+            else if (addSelect)
+                sb.Append(" select m ");
+
             sb.AppendFormat(CultureInfo.InvariantCulture, "FROM {0} as m \r\n", objectType.Name);
             var metadata = this.GetMetadata().FirstOrDefault(md => md.Type == objectType);
             foreach (var rp in metadata.Properties.Where(p => p.RelationType == RelationType.Reference))
@@ -288,7 +291,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
             if (objectType == null)
                 throw new ArgumentException(string.Format(CultureInfo.InvariantCulture, "Type not found: {0}", typeName), "typeName");
 
-            StringBuilder sb = CreateFromAndWhereHql(objectType, members, criteria);
+            StringBuilder sb = CreateFromAndWhereHql(objectType, members, criteria, true);
 
             if (sorting != null && sorting.Count > 0)
                 sb.AppendFormat(CultureInfo.InvariantCulture, "order by {0}\r\n", string.Join(",", sorting));
@@ -316,7 +319,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
             Type objectType = Type.GetType(typeName);
 
-            StringBuilder sb = CreateFromAndWhereHql(objectType, null, criteria);
+            StringBuilder sb = CreateFromAndWhereHql(objectType, null, criteria, false);
             sb.Insert(0, string.Format(CultureInfo.InvariantCulture, "Select Count(m.{0})", GetKeyPropertyName(objectType)));
             var result = GetObjects(sb.ToString());
             if (result.Count == 1)

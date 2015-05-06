@@ -434,6 +434,21 @@ namespace Xpand.ExpressApp.NH
             return new List<CriteriaOperator>();
         }
 
+        private CriteriaOperator CreateSecuredCriteria(Type objectType, CriteriaOperator criteria)
+        {
+            var secureCriteria = GetSecurityCriteria(objectType);
+            if (!ReferenceEquals(null, criteria))
+                secureCriteria.Add(criteria);
+
+            if (secureCriteria.Count > 0)
+            {
+                CriteriaObjectReplacer replacer = new CriteriaObjectReplacer(typesInfo);
+                var joinedCriteria = CriteriaOperator.And(secureCriteria);
+                return (CriteriaOperator)joinedCriteria.Accept(replacer);
+            }
+
+            return null;
+        }
         internal IEnumerable GetObjects(Type objectType, IList<CriteriaOperator> memberNames, CriteriaOperator criteria, List<SortProperty> sorting, int topReturnedObjectsCount)
         {
             Guard.ArgumentNotNull(objectType, "objectType");
@@ -447,19 +462,9 @@ namespace Xpand.ExpressApp.NH
             }
 
 
-            var secureCriteria = GetSecurityCriteria(objectType);
-            if (!ReferenceEquals(null, criteria))
-                secureCriteria.Add(criteria);
-
-            string criteriaString = null;
-            if (secureCriteria.Count > 0)
-            {
-                CriteriaObjectReplacer replacer = new CriteriaObjectReplacer(typesInfo);
-                var joinedCriteria = CriteriaOperator.And(secureCriteria);
-                joinedCriteria.Accept(replacer);
-
-                criteriaString = ConvertToString((CriteriaOperator)joinedCriteria.Accept(replacer));
-            }
+            var securedCriteria = CreateSecuredCriteria(objectType, criteria);
+            string criteriaString = !ReferenceEquals(null, securedCriteria) ?  ConvertToString(securedCriteria) : null;
+            
             var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, memberNames, criteriaString,
                 sortInfos, topReturnedObjectsCount);
 
@@ -780,7 +785,8 @@ namespace Xpand.ExpressApp.NH
             CriteriaToNHExpressionConverter converter = new CriteriaToNHExpressionConverter();
             IQueryable objectQuery = new RemoteObjectQuery<T>(new RemoteQueryProvider(this));
 
-            objectQuery = objectQuery.AppendWhere(converter, workCriteria);
+            objectQuery = objectQuery.AppendWhere(converter, CreateSecuredCriteria(typeof(T), workCriteria));
+
             if (sorting != null)
             {
                 List<ServerModeOrderDescriptor> orderDescriptors = new List<ServerModeOrderDescriptor>();
