@@ -101,7 +101,7 @@ namespace Xpand.ExpressApp.NH
 
         public IDisposable CreateParseCriteriaScope()
         {
-            return new ParseCriteriaScope();
+            return new ParseCriteriaScope(this);
         }
 
         public object CreateServerCollection(Type objectType, DevExpress.Data.Filtering.CriteriaOperator criteria)
@@ -280,7 +280,10 @@ namespace Xpand.ExpressApp.NH
 
         public DevExpress.Data.Filtering.CriteriaOperator ParseCriteria(string criteria)
         {
-            return CriteriaOperator.TryParse(criteria);
+            using (var scope = CreateParseCriteriaScope())
+            {
+                return CriteriaOperator.TryParse(criteria);
+            }
         }
 
         public void ReloadCollection(object collection)
@@ -420,7 +423,10 @@ namespace Xpand.ExpressApp.NH
                 IList<string> criteria = selectDataSecurity.GetObjectCriteria(type);
                 if (criteria != null)
                 {
-                    return criteria.Select(c => CriteriaOperator.TryParse(c)).Where(c => !ReferenceEquals(c, null)).ToList();
+                    using (var scope = CreateParseCriteriaScope())
+                    {
+                        return criteria.Select(c => CriteriaOperator.TryParse(c)).Where(c => !ReferenceEquals(c, null)).ToList();
+                    }
                 }
 
             }
@@ -520,7 +526,7 @@ namespace Xpand.ExpressApp.NH
                 MergeWithExistingInstances(list, state);
 
 
-            foreach (var member in typeInfo.Members.Where(m => m.IsAssociation && !m.IsList && !m.IsReadOnly))
+            foreach (var member in typeInfo.Members.Where(m => m.MemberTypeInfo.IsPersistent && !m.IsList && !m.IsReadOnly))
             {
                 var obj = member.GetValue(instance);
                 if (obj != null)
@@ -806,6 +812,33 @@ namespace Xpand.ExpressApp.NH
             }
 
             return result;
+        }
+
+        internal static string GetKeyValueAsString(ITypesInfo typesInfo, object obj)
+        {
+            Object keyValue = BaseObjectSpace.GetKeyValue(typesInfo, obj);
+            if (keyValue != null)
+            {
+                Type objectType = null;
+                if (obj is XafDataViewRecord)
+                {
+                    objectType = ((XafDataViewRecord)obj).ObjectType;
+                }
+                else if (obj != null)
+                {
+                    objectType = obj.GetType();
+                }
+                if (typesInfo.FindTypeInfo(objectType).KeyMembers.Count > 1)
+                {
+                    throw new NotSupportedException("Composite primary keys are not supported yet.");
+                }
+                else
+                {
+                    return keyValue.ToString();
+                }
+            }
+	
+            throw new NotImplementedException("Null key values are not supported.");
         }
     }
 }

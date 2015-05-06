@@ -125,7 +125,6 @@ namespace Xpand.ExpressApp.NH
                             InitializeManyToMany(memberInfo);
                             break;
                         case RelationType.Reference:
-                            memberInfo.IsAssociation = true;
                             break;
                     }
 
