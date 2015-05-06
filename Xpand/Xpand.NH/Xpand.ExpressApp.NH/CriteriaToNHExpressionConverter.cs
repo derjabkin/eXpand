@@ -58,22 +58,18 @@ namespace Xpand.ExpressApp.NH
                 }
             }
         }
-        public CriteriaToNHExpressionConverter()
-            : base()
-        {
-        }
         public Expression Convert(ParameterExpression thisExpression, CriteriaOperator criteria)
         {
             Expression result = null;
-            CriteriaToEFExpressionConverterInternal criteriaToEFExpressionConverterInternal = new CriteriaToEFExpressionConverterInternal(thisExpression);
-            criteriaToEFExpressionConverterInternal.OnFunctionOperator += CriteriaToEFExpressionConverterInternal_OnFunctionOperator;
+            CriteriaToEFExpressionConverterInternal converter = new CriteriaToEFExpressionConverterInternal(thisExpression);
+            converter.OnFunctionOperator += CriteriaToEFExpressionConverterInternal_OnFunctionOperator;
             try
             {
-                result = criteriaToEFExpressionConverterInternal.Process(criteria);
+                result = converter.Process(criteria);
             }
             finally
             {
-                criteriaToEFExpressionConverterInternal.OnFunctionOperator -= CriteriaToEFExpressionConverterInternal_OnFunctionOperator;
+                converter.OnFunctionOperator -= CriteriaToEFExpressionConverterInternal_OnFunctionOperator;
             }
             return result;
         }

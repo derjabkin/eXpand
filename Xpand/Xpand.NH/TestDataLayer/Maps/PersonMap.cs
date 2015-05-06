@@ -16,6 +16,7 @@ namespace TestDataLayer.Maps
             Map(x => x.LastName);
             Map(x => x.BirthDate).Nullable();
             References(x => x.Address);
+            References(x => x.Manager);
             HasMany(x => x.PhoneNumbers).KeyColumn("PersonId").Cascade.AllDeleteOrphan().Not.LazyLoad().Inverse();
             Not.LazyLoad();
         }

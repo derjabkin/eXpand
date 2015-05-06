@@ -188,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BindingFactory.cs" />
+    <Compile Include="CriteriaObjectReplacer.cs" />
     <Compile Include="CriteriaToNHConverterHelper.cs" />
     <Compile Include="CriteriaToNHExpressionConverter.cs" />
     <Compile Include="CriteriaToStringWrapperSubstituteProcessor.cs" />

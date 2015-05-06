@@ -51,6 +51,7 @@ namespace Xpand.ExpressApp.NH
                 }
             }
         }
+
         private static void CriteriaOperator_UserValueParse(Object sender, UserValueProcessingEventArgs e)
         {
             if (!e.Handled && !String.IsNullOrWhiteSpace(e.Data) && (e.Tag == objectTag) && (ParseCriteriaScope.currentObjectSpace != null))

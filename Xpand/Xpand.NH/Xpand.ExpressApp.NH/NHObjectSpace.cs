@@ -451,9 +451,15 @@ namespace Xpand.ExpressApp.NH
             if (!ReferenceEquals(null, criteria))
                 secureCriteria.Add(criteria);
 
-            string criteriaString = secureCriteria.Count > 0 ? 
-                ConvertToString(CriteriaOperator.And(secureCriteria)) : null;
+            string criteriaString = null;
+            if (secureCriteria.Count > 0)
+            {
+                CriteriaObjectReplacer replacer = new CriteriaObjectReplacer(typesInfo);
+                var joinedCriteria = CriteriaOperator.And(secureCriteria);
+                joinedCriteria.Accept(replacer);
 
+                criteriaString = ConvertToString((CriteriaOperator)joinedCriteria.Accept(replacer));
+            }
             var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, memberNames, criteriaString,
                 sortInfos, topReturnedObjectsCount);
 

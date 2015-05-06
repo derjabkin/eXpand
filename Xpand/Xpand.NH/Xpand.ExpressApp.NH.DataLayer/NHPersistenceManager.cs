@@ -194,14 +194,23 @@ namespace Xpand.ExpressApp.NH.DataLayer
                     });
                 }
             }
-            foreach (var property in cm.PropertyIterator.Concat(cm.ReferenceablePropertyIterator))
-            {
-                AddPropertyMetadata(result, property);
-            }
+
+            AddProperties(result, cm.ReferenceablePropertyIterator);
+            AddProperties(result, cm.PropertyIterator);
 
             return result;
         }
 
+        private static void AddProperties(TypeMetadata metadata, IEnumerable<Property> properties)
+        {
+            foreach (var property in properties)
+            {
+                if (!metadata.Properties.Any(p => p.Name == property.Name))
+                {
+                    AddPropertyMetadata(metadata, property);
+                }
+            }
+        }
         private static PropertyMetadata AddPropertyMetadata(TypeMetadata typeMetadata, Property property)
         {
             PropertyMetadata propertyMetadata = new PropertyMetadata
@@ -221,7 +230,6 @@ namespace Xpand.ExpressApp.NH.DataLayer
 
             StringBuilder sb = new StringBuilder();
 
-            List<string> joinObjects = new List<string>();
             if (members != null && members.Count > 0)
             {
                 sb.Append("select ");
@@ -234,9 +242,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
                         sb.AppendFormat(CultureInfo.InvariantCulture, "m.{0},", memberName);
                     else
                     {
-                        if (!joinObjects.Contains(parts[0]))
-                            joinObjects.Add(parts[0]);
-                        sb.AppendFormat(CultureInfo.InvariantCulture, "m{0}.{1},", joinObjects.IndexOf(parts[0]), parts[1]);
+                        sb.AppendFormat(CultureInfo.InvariantCulture, "{0},",memberName);
 
                     }
                 }
@@ -244,12 +250,12 @@ namespace Xpand.ExpressApp.NH.DataLayer
                 sb.Append(" ");
             }
             sb.AppendFormat(CultureInfo.InvariantCulture, "FROM {0} as m \r\n", objectType.Name);
-            for (int i = 0; i < joinObjects.Count; i++)
+            var metadata = this.GetMetadata().FirstOrDefault(md => md.Type == objectType);
+            foreach (var rp in metadata.Properties.Where(p => p.RelationType == RelationType.Reference))
             {
-                sb.AppendFormat(CultureInfo.InvariantCulture, "left join m.{0} as m{1}\r\n", joinObjects[i], i);
+                sb.AppendFormat(CultureInfo.InvariantCulture, "left join m.{0} as {0}\r\n", rp.Name);
             }
 
-            var metadata = this.GetMetadata().FirstOrDefault(md => md.Type == objectType);
             if (metadata != null)
             {
                 string[] relationPropertyNames = metadata.Properties
@@ -311,7 +317,7 @@ namespace Xpand.ExpressApp.NH.DataLayer
             Type objectType = Type.GetType(typeName);
 
             StringBuilder sb = CreateFromAndWhereHql(objectType, null, criteria);
-            sb.Insert(0, string.Format(CultureInfo.InvariantCulture, "Select Count({0})", GetKeyPropertyName(objectType)));
+            sb.Insert(0, string.Format(CultureInfo.InvariantCulture, "Select Count(m.{0})", GetKeyPropertyName(objectType)));
             var result = GetObjects(sb.ToString());
             if (result.Count == 1)
                 return Convert.ToInt32(result[0]);
