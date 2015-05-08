@@ -23,7 +23,7 @@ namespace Xpand.ExpressApp.NH
         private ITypeInfo GetPersistentTypeInfo(CriteriaOperator op)
         {
             OperandValue theOperand = op as OperandValue;
-            if (!ReferenceEquals(null, theOperand))
+            if (!ReferenceEquals(null, theOperand) && !ReferenceEquals(null, theOperand.Value))
             {
                 var ti = typesInfo.FindTypeInfo(theOperand.Value.GetType());
                 if (ti != null && ti.IsPersistent && ti.KeyMember != null)

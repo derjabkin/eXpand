@@ -10,6 +10,8 @@ namespace Xpand.ExpressApp.NH.Core
     public class RemoteQueryProvider : IQueryProvider
     {
         private readonly IExpressionExecutor executor;
+        private int addSecurityWhereCount;
+
 
         public RemoteQueryProvider(IExpressionExecutor executor)
         {
@@ -24,12 +26,28 @@ namespace Xpand.ExpressApp.NH.Core
             throw new NotImplementedException();
         }
 
+
+        public void BeginAddSecurityWhere()
+        {
+            addSecurityWhereCount++;
+        }
+
+        public void EndAddSecurityWhere()
+        {
+            addSecurityWhereCount--;
+        }
+
+        private bool CanAddSecurityWhere { get { return addSecurityWhereCount == 0; } }
+
         public IQueryable CreateQuery(System.Linq.Expressions.Expression expression)
         {
             Type elementType = TypeSystem.GetElementType(expression.Type);
             try
             {
-                return (IQueryable)Activator.CreateInstance(typeof(RemoteObjectQuery<>).MakeGenericType(elementType), this, expression );
+                var result = (IQueryable)Activator.CreateInstance(typeof(RemoteObjectQuery<>).MakeGenericType(elementType), this, expression );
+                if (CanAddSecurityWhere)
+                    executor.AddSecurityWhere(result, elementType);
+                return result;
             }
             catch (System.Reflection.TargetInvocationException tie)
             {

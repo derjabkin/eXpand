@@ -67,6 +67,7 @@ namespace Xpand.ExpressApp.NH.Service
                     {
                         assembly = Assembly.LoadFrom(file);
                     }
+                    catch (BadImageFormatException) { }
                     catch (FileLoadException) { }
 
                     if (assembly != null)

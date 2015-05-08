@@ -169,10 +169,7 @@ namespace Xpand.ExpressApp.NH
         {
             Guard.ArgumentNotNull(objectType, "objectType");
 
-            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName,
-                !object.ReferenceEquals(null, criteria) ? ConvertToString(criteria) : null);
-
-
+            return persistenceManager.GetObjectsCount(objectType.AssemblyQualifiedName, GetCriteriaString(objectType, criteria));
         }
 
 
@@ -462,15 +459,21 @@ namespace Xpand.ExpressApp.NH
             }
 
 
-            var securedCriteria = CreateSecuredCriteria(objectType, criteria);
-            string criteriaString = !ReferenceEquals(null, securedCriteria) ?  ConvertToString(securedCriteria) : null;
-            
+            string criteriaString = GetCriteriaString(objectType, criteria);
+
             var objects = persistenceManager.GetObjects(objectType.AssemblyQualifiedName, memberNames, criteriaString,
                 sortInfos, topReturnedObjectsCount);
 
             if (memberNames == null || memberNames.Count == 0)
                 AddToCache(objectType, objects);
             return objects;
+        }
+
+        private string GetCriteriaString(Type objectType, CriteriaOperator criteria)
+        {
+            var securedCriteria = CreateSecuredCriteria(objectType, criteria);
+            string criteriaString = !ReferenceEquals(null, securedCriteria) ? ConvertToString(securedCriteria) : null;
+            return criteriaString;
         }
 
         private void AddToCache(Type objectType, IList objects)
@@ -785,7 +788,7 @@ namespace Xpand.ExpressApp.NH
             CriteriaToNHExpressionConverter converter = new CriteriaToNHExpressionConverter();
             IQueryable objectQuery = new RemoteObjectQuery<T>(new RemoteQueryProvider(this));
 
-            objectQuery = objectQuery.AppendWhere(converter, CreateSecuredCriteria(typeof(T), workCriteria));
+            objectQuery = AddSecurityWhere(objectQuery, typeof(T), converter, workCriteria);
 
             if (sorting != null)
             {
@@ -798,6 +801,20 @@ namespace Xpand.ExpressApp.NH
                 objectQuery = objectQuery.MakeOrderBy(converter, orderDescriptors.ToArray());
             }
             return objectQuery;
+        }
+
+        private IQueryable AddSecurityWhere(IQueryable objectQuery, Type elementType, CriteriaToNHExpressionConverter converter, CriteriaOperator workCriteria)
+        {
+            RemoteQueryProvider provider = (RemoteQueryProvider)objectQuery.Provider;
+            try
+            {
+                provider.BeginAddSecurityWhere();
+                return objectQuery.AppendWhere(converter, CreateSecuredCriteria(elementType, workCriteria));
+            }
+            finally
+            {
+                provider.EndAddSecurityWhere();
+            }
         }
         internal IQueryable GetObjectQuery(Type type, IList<String> memberNames, CriteriaOperator criteria, IList<SortProperty> sorting)
         {
@@ -849,8 +866,14 @@ namespace Xpand.ExpressApp.NH
                     return keyValue.ToString();
                 }
             }
-	
+
             throw new NotImplementedException("Null key values are not supported.");
+        }
+
+
+        public void AddSecurityWhere(IQueryable queryable, Type elementType)
+        {
+            AddSecurityWhere(queryable, elementType, new CriteriaToNHExpressionConverter(), null);
         }
     }
 }
