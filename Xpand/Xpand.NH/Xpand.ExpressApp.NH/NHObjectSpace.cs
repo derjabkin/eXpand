@@ -828,7 +828,12 @@ namespace Xpand.ExpressApp.NH
             NHNodeFactory factory = new NHNodeFactory();
             var result = persistenceManager.ExecuteExpression(factory.Create(expression));
             IList list = result as IList;
-            if (list != null && list.Cast<object>().Select(o => o.GetType()).Distinct().Count() == 1)
+            if (list != null && list
+                .Cast<object>()
+                .Where(o => o != null)
+                .Select(o => o.GetType())
+                .Distinct()
+                .Count() == 1)
             {
 
                 var persistentObjects = list.OfType<object>().Where(o => IsPersistent(o)).ToArray();
@@ -837,7 +842,6 @@ namespace Xpand.ExpressApp.NH
                     AddToCache(persistentObjects[0].GetType(), persistentObjects);
                 }
 
-                return persistentObjects;
             }
 
             return result;

@@ -13,6 +13,7 @@ using DevExpress.Xpo.Metadata;
 using Fasterflect;
 using Xpand.Persistent.Base.ModelAdapter;
 using Xpand.Utils.Helpers;
+using System.Collections.Concurrent;
 
 namespace Xpand.Persistent.Base.General {
 
@@ -43,11 +44,33 @@ namespace Xpand.Persistent.Base.General {
             return xpClassInfo ?? new XPDataObjectClassInfo(xpDictionary, className);
         }
 
-        public static void AssignAsPersistentEntityStore(this XpoTypeInfoSource xpoTypeInfoSource){
-            var entityStores = (List<IEntityStore>) XafTypesInfo.Instance.GetFieldValue("entityStores");
-            entityStores.RemoveAll(store => store is XpoTypeInfoSource);
+        public static void AssignAsPersistentEntityStore(this XpoTypeInfoSource xpoTypeInfoSource) {
+
+            var entityStoresInternal = XafTypesInfo.Instance.GetFieldValue("entityStores");
+            TryFilterList(entityStoresInternal);
+            TryFilterConcurrentBag(entityStoresInternal);
             XafTypesInfo.Instance.SetFieldValue("dcEntityStore", null);
             ((TypesInfo) XafTypesInfo.Instance).AddEntityStore(xpoTypeInfoSource);
+        }
+
+        private static void TryFilterList(object entityStoresInternal) {
+            var entityStores = entityStoresInternal as List<IEntityStore>;
+            if (entityStores != null)
+                entityStores.RemoveAll(store => store is XpoTypeInfoSource);
+        }
+
+        private static void TryFilterConcurrentBag(object entityStoresInternal) {
+            ConcurrentBag<IEntityStore> entityStoresBag = entityStoresInternal as ConcurrentBag<IEntityStore>;
+            if (entityStoresBag != null){
+                IEntityStore store;
+                List<IEntityStore> filteredStores = new List<IEntityStore>();
+                while(entityStoresBag.TryTake(out store))
+                {
+                    if (!(store is XpoTypeInfoSource))
+                        filteredStores.Add(store);
+                }
+                filteredStores.ForEach(fs => entityStoresBag.Add(fs));
+            }
         }
 
         public static void AssignAsInstance(this ITypesInfo typesInfo) {
