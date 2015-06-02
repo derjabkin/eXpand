@@ -45,7 +45,7 @@ namespace Xpand.ExpressApp.NH.Service
         {
             get { return "ConnectionString"; }
         }
-        public System.Collections.IList UpdateObjects(System.Collections.IList updateList, System.Collections.IList deleteList)
+        public virtual System.Collections.IList UpdateObjects(System.Collections.IList updateList, System.Collections.IList deleteList)
         {
             return PersistenceManager.UpdateObjects(updateList, deleteList);
         }

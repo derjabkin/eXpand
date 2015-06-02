@@ -76,6 +76,7 @@ namespace Xpand.ExpressApp.NH
                 objects.Clear();
             }
             objects = null;
+            calculatedObjectsCount = null;
         }
         private void RemoveObject(Object obj, Int32 index)
         {
@@ -517,5 +518,6 @@ namespace Xpand.ExpressApp.NH
         {
             return "";
         }
+
     }
 }

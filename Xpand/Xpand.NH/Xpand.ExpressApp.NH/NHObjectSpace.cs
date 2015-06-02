@@ -66,6 +66,13 @@ namespace Xpand.ExpressApp.NH
             throw new NotImplementedException();
         }
 
+        public override bool CanFilterByNonPersistentMembers
+        {
+            get
+            {
+                return false;
+            }
+        }
         public bool CanApplyCriteria(Type collectionType)
         {
             return typeof(NHCollection).IsAssignableFrom(collectionType);
@@ -879,5 +886,6 @@ namespace Xpand.ExpressApp.NH
         {
             AddSecurityWhere(queryable, elementType, new CriteriaToNHExpressionConverter(), null);
         }
+
     }
 }

@@ -222,6 +222,19 @@ namespace Xpand.ExpressApp.NH.DataLayer
                         theOperator.OperatorType,
                         new MsSqlFormatterHelper.MSSqlServerVersion(false, false, false),
                         theOperator.Operands.ToArray()));
+                case FunctionOperatorType.Contains:
+                    if (theOperator.Operands.Count >= 2)
+                    {
+                        return new CriteriaToStringVisitResult(
+                            String.Format(CultureInfo.InvariantCulture, "{0} like '%' + {1} + '%'",
+                                Process(theOperator.Operands[0]).Result,
+                                Process(theOperator.Operands[1]).Result)
+                        );
+                    }
+                    else
+                    {
+                        return base.Visit(theOperator);
+                    }
                 default:
                     object result;
                     if (CriteriaToHqlConverterHelper.ConvertCustomFunctionToValue(theOperator, out result))
