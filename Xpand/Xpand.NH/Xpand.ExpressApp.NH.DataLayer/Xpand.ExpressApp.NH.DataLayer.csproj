@@ -68,12 +68,13 @@
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="Serialize.Linq">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Serialize.Linq.1.2.3\lib\net40\Serialize.Linq.dll</HintPath>
@@ -88,7 +89,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="Xpand.ExpressApp.NH.Core">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.Core.dll</HintPath>
+      <HintPath>..\Xpand.ExpressApp.NH.Core\bin\Debug\Xpand.ExpressApp.NH.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -194,17 +194,16 @@
     <Reference Include="DevExpress.XtraWizard.v14.2">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
-    <Reference Include="FluentNHibernate, Version=1.4.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
+    <Reference Include="FluentNHibernate">
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections, Version=1.0.1.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="NHibernate, Version=3.3.1.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\NHibernate.3.3.3.4001\lib\Net35\NHibernate.dll</HintPath>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\NHibernate.3.3.1.4000\lib\Net35\NHibernate.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System">
       <Name>System</Name>
@@ -221,22 +220,6 @@
     <Reference Include="System.Xml">
       <Name>System.XML</Name>
       <Private>False</Private>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH.BaseImpl">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.BaseImpl.dll</HintPath>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH.Core">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH.DataLayer">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.DataLayer.dll</HintPath>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -255,7 +238,6 @@
       <SubType>Designer</SubType>
       <DependentUpon>Module.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\licenses.licx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="DatabaseUpdate\ReadMe.txt" />
@@ -279,6 +261,22 @@
     <ProjectReference Include="..\TestEntities\TestEntities.csproj">
       <Project>{94593ff7-d191-40a4-93b7-4771ff397ec0}</Project>
       <Name>TestEntities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.BaseImpl\Xpand.ExpressApp.NH.BaseImpl.csproj">
+      <Project>{1d957b2a-fe7a-4ba8-bdc2-3d8aa7770e18}</Project>
+      <Name>Xpand.ExpressApp.NH.BaseImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.Core\Xpand.ExpressApp.NH.Core.csproj">
+      <Project>{e87b0afc-3b3e-4969-bbaf-afdda718bbc7}</Project>
+      <Name>Xpand.ExpressApp.NH.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.DataLayer\Xpand.ExpressApp.NH.DataLayer.csproj">
+      <Project>{15f6477b-a7f3-43fb-b1b7-4c08c9c12e89}</Project>
+      <Name>Xpand.ExpressApp.NH.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH\Xpand.ExpressApp.NH.csproj">
+      <Project>{3eb209eb-c0a7-489f-9287-612ce5da911d}</Project>
+      <Name>Xpand.ExpressApp.NH</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

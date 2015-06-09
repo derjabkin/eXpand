@@ -38,38 +38,24 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevExpress.Charts.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Charts.v14.2.Core.dll</HintPath>
+    <Reference Include="DevExpress.Charts.v14.2.Core" />
+    <Reference Include="DevExpress.CodeParser.v14.2" />
+    <Reference Include="DevExpress.Data.v14.2" />
+    <Reference Include="DevExpress.Images.v14.2">
     </Reference>
-    <Reference Include="DevExpress.CodeParser.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.CodeParser.v14.2.dll</HintPath>
+    <Reference Include="DevExpress.Office.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.Data.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Data.v14.2.dll</HintPath>
+    <Reference Include="DevExpress.PivotGrid.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.Images.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Images.v14.2.dll</HintPath>
+    <Reference Include="DevExpress.Printing.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.Office.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Office.v14.2.Core.dll</HintPath>
+    <Reference Include="DevExpress.RichEdit.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.PivotGrid.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.PivotGrid.v14.2.Core.dll</HintPath>
+    <Reference Include="DevExpress.Sparkline.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.Printing.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Printing.v14.2.Core.dll</HintPath>
+    <Reference Include="DevExpress.Spreadsheet.v14.2.Core">
     </Reference>
-    <Reference Include="DevExpress.RichEdit.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.RichEdit.v14.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Sparkline.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Sparkline.v14.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Spreadsheet.v14.2.Core, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Spreadsheet.v14.2.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Utils.v14.2, Version=14.2.6.0, Culture=neutral, PublicKeyToken=8f2823b07f50ed12, processorArchitecture=MSIL">
-      <HintPath>..\..\..\Support\_third_party_assemblies\Packages\DevExpress.Core.14.2.6.0\lib\net40\DevExpress.Utils.v14.2.dll</HintPath>
+    <Reference Include="DevExpress.Utils.v14.2">
     </Reference>
     <Reference Include="FluentNHibernate">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\FluentNHibernate.1.4.0.0\lib\net35\FluentNHibernate.dll</HintPath>
@@ -83,6 +69,7 @@
     </Reference>
     <Reference Include="Serialize.Linq">
       <HintPath>..\..\..\Support\_third_party_assemblies\Packages\Serialize.Linq.1.2.3\lib\net40\Serialize.Linq.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
@@ -92,18 +79,6 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
-    <Reference Include="Xpand.ExpressApp.NH.BaseImpl">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.BaseImpl.dll</HintPath>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH.Core">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Xpand.ExpressApp.NH.DataLayer">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\Xpand.DLL\Xpand.ExpressApp.NH.DataLayer.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IPersistenceManagerService.cs" />
@@ -122,6 +97,22 @@
     <ProjectReference Include="..\TestDataLayer\TestDataLayer.csproj">
       <Project>{e0d3a6d9-5764-472e-b3b6-c2d71757e0d5}</Project>
       <Name>TestDataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.BaseImpl\Xpand.ExpressApp.NH.BaseImpl.csproj">
+      <Project>{1d957b2a-fe7a-4ba8-bdc2-3d8aa7770e18}</Project>
+      <Name>Xpand.ExpressApp.NH.BaseImpl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.Core\Xpand.ExpressApp.NH.Core.csproj">
+      <Project>{e87b0afc-3b3e-4969-bbaf-afdda718bbc7}</Project>
+      <Name>Xpand.ExpressApp.NH.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH.DataLayer\Xpand.ExpressApp.NH.DataLayer.csproj">
+      <Project>{15f6477b-a7f3-43fb-b1b7-4c08c9c12e89}</Project>
+      <Name>Xpand.ExpressApp.NH.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Xpand.ExpressApp.NH\Xpand.ExpressApp.NH.csproj">
+      <Project>{3eb209eb-c0a7-489f-9287-612ce5da911d}</Project>
+      <Name>Xpand.ExpressApp.NH</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
