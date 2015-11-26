@@ -27,6 +27,7 @@ using Xpand.Persistent.Base.ModelAdapter;
 using Xpand.Persistent.Base.Xpo;
 using Xpand.Xpo.CustomFunctions;
 using EditorAliases = Xpand.Persistent.Base.General.EditorAliases;
+using DevExpress.ExpressApp.Xpo;
 
 namespace Xpand.ExpressApp.SystemModule {
     [ToolboxItem(true)]
@@ -73,11 +74,19 @@ namespace Xpand.ExpressApp.SystemModule {
         public override void CustomizeTypesInfo(ITypesInfo typesInfo) {
             base.CustomizeTypesInfo(typesInfo);
             new FullTextContainsFunction().Register();
-            if (Application != null && Application.Security != null) {
+            if (Application != null && Application.Security != null && CanCustomizeTypeInfo()) {
                 CreatePessimisticLockingField(typesInfo);
             }
         }
 
+        private bool CanCustomizeTypeInfo()
+        {
+            using (var objectSpace = Application.CreateObjectSpace())
+            {
+                XPObjectSpace xos = objectSpace as XPObjectSpace;
+                return xos == null || !(xos.Session.DataLayer is ThreadSafeDataLayer);
+            }
+        }
         void CreatePessimisticLockingField(ITypesInfo typesInfo) {
             var typeInfos = typesInfo.PersistentTypes.Where(info => info.FindAttribute<PessimisticLockingAttribute>() != null);
             foreach (var typeInfo in typeInfos) {
